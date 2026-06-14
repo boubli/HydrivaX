@@ -37,37 +37,73 @@
   <div class="container">
     <div class="section-header">
       <h2>Boot from ISO</h2>
-      <p>HydrivaX OS v1.2 — VirtualBox, Proxmox VMs, mini PCs, and old hardware.</p>
+      <p>HydrivaX OS v1.2 — VirtualBox, Proxmox VMs, mini PCs, and physical hardware.</p>
     </div>
+
+    <!-- Installation Options Overview -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 0 auto 3rem; max-width: 960px;">
+      <div class="feature-card" style="border: 1px solid var(--border-glow); background: rgba(1, 44, 87, 0.4); text-align: left; padding: 2rem; border-radius: 8px;">
+        <h3 style="color: var(--cyan-bright); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">💻 Option A: Virtual Machines</h3>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem;">Run HydrivaX OS inside a hypervisor (Proxmox VE VM, VirtualBox, or VMware). Perfect for testing, development, and clean sandboxed hosting environments.</p>
+        <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.8;">
+          <li>Upload ISO to Proxmox or VM datastore</li>
+          <li>Create VM with 1 CPU, 1-2 GB RAM, SATA/VirtIO</li>
+          <li>Attach ISO as virtual optical drive</li>
+          <li>Boot and access via noVNC / VGA Console</li>
+        </ul>
+      </div>
+      <div class="feature-card" style="border: 1px solid var(--border-glow); background: rgba(1, 44, 87, 0.4); text-align: left; padding: 2rem; border-radius: 8px;">
+        <h3 style="color: var(--cyan-bright); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">🔌 Option B: Physical Hardware</h3>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem;">Install HydrivaX OS directly on bare metal (Mini PCs, Intel NUCs, old desktops, or dedicated rack servers) to utilize 100% of physical hardware power.</p>
+        <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.8;">
+          <li>Flash ISO to USB using <strong>Rufus</strong>, <strong>BalenaEtcher</strong>, or <strong>Ventoy</strong></li>
+          <li>Insert USB into the target machine</li>
+          <li>Access BIOS/Boot Menu (usually F12, F11, or Esc)</li>
+          <li>Boot from USB (UEFI & Legacy BIOS are supported)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Detailed Step-by-Step -->
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div>
           <h3>Download the ISO</h3>
-          <p>Grab <code>HydrivaX-v1.2-Server-amd64.iso</code> from the <a href="download.html">Releases</a> page.</p>
+          <p>Grab <code>HydrivaX-v1.2-Server-amd64.iso</code> from the <a href="download.html">Download</a> page. Ensure you verify the SHA256 checksum to guarantee a clean and corruption-free image.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div>
-          <h3>Attach to a VM or upload to Proxmox</h3>
-          <p>Mount the ISO as the optical drive and set boot order to CD/DVD first.</p>
+          <h3>Prepare Boot Medium</h3>
+          <p><strong>For VMs (Proxmox VE):</strong> Upload the ISO to your ISO library (e.g., local storage) via the Proxmox Web UI, or use SCP:</p>
           <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/</div>
+          <p style="margin-top: 1rem;"><strong>For Physical Hardware:</strong> Write the ISO to a USB flash drive (8GB+ recommended) using <strong>Rufus</strong> (use DD image mode if prompted) or <strong>BalenaEtcher</strong>.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div>
-          <h3>Recommended VM settings</h3>
-          <p><strong>Proxmox:</strong> SeaBIOS, i440fx, 1–2 GB RAM, VirtIO network. Enable <strong>Serial terminal 0</strong> if noVNC shows a black screen — then pick <em>Serial Console</em> at boot.</p>
-          <p><strong>VirtualBox:</strong> BIOS firmware, 1–2 GB RAM, VBoxSVGA or VMSVGA graphics.</p>
+          <h3>Configure Settings & Boot</h3>
+          <p><strong>For Virtual Machines:</strong> Create a new KVM VM. Assign 1–2 vCPUs, 1–2 GB RAM, and a VirtIO Network interface. Under hardware, add a CD/DVD drive, mount the ISO, and set it first in the Boot Order settings.</p>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);"><em>Pro Tip:</em> In Proxmox, add a <strong>Serial terminal 0</strong> and set display to <code>Serial terminal 0</code> if you get a black screen in noVNC.</p>
+          
+          <p style="margin-top: 1rem;"><strong>For Physical Hardware:</strong> Plug the USB drive into your target machine. Power it on and immediately press the Boot Menu key (often <strong>F12</strong>, <strong>F11</strong>, <strong>F8</strong>, or <strong>Esc</strong>). Select your USB drive from the boot options.</p>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);"><em>Pro Tip:</em> Enter BIOS settings and <strong>disable Secure Boot</strong>. Custom live images can sometimes be blocked by UEFI secure boot keys.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div>
           <h3>Log in</h3>
-          <p>At the GRUB menu choose VGA Text, Serial Console, or Fail-safe. Credentials:</p>
+          <p>At the GRUB boot menu, choose one of the following boot entries:</p>
+          <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted); line-height: 1.6;">
+            <li><strong>VGA Text:</strong> Standard console output (recommended for VirtualBox and local monitors).</li>
+            <li><strong>Serial Console:</strong> Directs boot logs to serial ttyS0 console (recommended for headless Proxmox VM consoles).</li>
+            <li><strong>Fail-safe:</strong> Safe mode using basic drivers for older or difficult hardware.</li>
+          </ul>
+          <p>Once loaded, log in with the live system credentials:</p>
           <div class="code-block"><span class="prompt">user</span> live
 <span class="prompt">pass</span> hydrivax</div>
         </div>
@@ -76,6 +112,7 @@
         <div class="step-num">5</div>
         <div>
           <h3>First commands</h3>
+          <p>Your live server is now up! Run information and status commands, or list the deployable modules:</p>
           <div class="code-block"><span class="prompt">$</span> hx-info
 <span class="prompt">$</span> hx-status
 <span class="prompt">$</span> hx-deploy list</div>

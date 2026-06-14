@@ -92,22 +92,29 @@ hx-deploy verify docker  # check if it's working
 
 Download `HydrivaX-v1.2-Server-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
 
-```bash
-# proxmox — upload ISO to template store
-scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/
-```
+#### Option A: Virtual Machines (Proxmox, VirtualBox, VMware)
+1. Upload the ISO to your hypervisor's storage. For Proxmox:
+   ```bash
+   scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/
+   ```
+2. Create a new VM (1-2 vCPUs, 1-2 GB RAM, SATA/VirtIO).
+3. Attach the ISO to the CD/DVD drive and boot.
+
+#### Option B: Physical Hardware / Bare Metal (Mini PCs, Intel NUC, Old PCs)
+1. Write the ISO to a USB drive (8GB+) using **Rufus**, **BalenaEtcher**, or **Ventoy**.
+2. Insert the USB drive into your target machine.
+3. Access the boot menu (F12, F11, F8, Esc) and boot from USB.
+4. *Tip:* Enter your BIOS/UEFI settings and **disable Secure Boot**.
 
 Live credentials:
-
 ```text
 user: live
 pass: hydrivax
 ```
 
 Recommended boot entries:
-
-- **VGA Text** for VirtualBox, Proxmox noVNC, and monitors
-- **Serial Console** for Proxmox serial terminal and headless machines
+- **VGA Text** for VirtualBox, Proxmox noVNC, local monitors
+- **Serial Console** for Proxmox serial terminal (ttyS0) and headless machines
 - **Fail-safe** for older or difficult hardware
 
 ### LXC template
