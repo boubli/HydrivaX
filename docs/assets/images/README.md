@@ -4,8 +4,9 @@ Managed visual assets for the GitHub Pages site.
 
 | File | Source | Used on |
 |------|--------|---------|
-| `logo.png` | Repository root `logo.png` | Navbar brand logo |
-| `logo-transparent.svg` | `logos/transparent-logo.svg` | Dark cards and large logo placements |
+| `navbar-logo.svg` | Cropped from `logos/transparent-logo.svg` | Navbar brand logo |
+| `logo-transparent.svg` | `logos/transparent-logo.svg` | Dark backgrounds and large placements |
+| `logo.png` | Repository root `logo.png` | README and fallback raster logo |
 | `logo-colored.svg` | `logos/colored-logo.svg` | Light sections, Open Graph fallback |
 | `favicon.svg` | Derived from brand palette | Browser tab icon |
 | `og-image.svg` | Custom social card | `og:image` meta tag |

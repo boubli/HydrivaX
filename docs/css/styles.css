@@ -63,19 +63,14 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-brand {
   display: flex;
   align-items: center;
-  width: 150px;
-  height: 42px;
-  overflow: hidden;
-  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .nav-brand img {
-  width: 150px;
-  height: 150px;
-  max-width: none;
-  object-fit: cover;
-  object-position: center 62%;
-  transform: translateY(-55px);
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 200px;
 }
 
 .nav-links {
