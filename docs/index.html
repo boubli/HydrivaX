@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HydrivaX — Minimal Headless Linux for Self-Hosted Infrastructure</title>
+  <meta name="description" content="HydrivaX is a stripped-down Debian 12 LXC template for Proxmox. 99 MB, 99 deployable modules, zero bloat.">
+  <meta property="og:title" content="HydrivaX">
+  <meta property="og:description" content="Minimal headless Linux for self-hosted infrastructure. 99 MB Proxmox LXC template.">
+  <meta property="og:image" content="assets/images/og-image.svg">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/logo-transparent.svg" alt="HydrivaX" width="36" height="36">
+      HydrivaX
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="install.html">Install</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="specs.html">Specs</a></li>
+      <li><a href="download.html" class="nav-cta">Download</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="hero-badge">Proxmox LXC Template</span>
+      <h1>Minimal headless Linux for <span>self-hosted</span> infrastructure</h1>
+      <p class="hero-tagline">A stripped-down Debian 12 base with a modular CLI toolkit. No GUI, no desktop, no bloat — just a clean starting point. Ships at 99 MB.</p>
+      <div class="hero-actions">
+        <a href="download.html" class="btn btn-primary">Download Release</a>
+        <a href="install.html" class="btn btn-ghost">Install Guide</a>
+      </div>
+    </div>
+    <div class="hero-visual cli-showcase">
+      <img src="assets/images/HydrivaX_CLI.png" alt="HydrivaX CLI showing the real MOTD and hx-info output" width="1024" height="379">
+    </div>
+  </div>
+</section>
+
+<div class="container stats-bar">
+  <div class="stat-card">
+    <div class="stat-value">99 MB</div>
+    <div class="stat-label">Template Size</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">346 MB</div>
+    <div class="stat-label">Rootfs</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">99</div>
+    <div class="stat-label">Modules</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">D12</div>
+    <div class="stat-label">Debian 12</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">LXC</div>
+    <div class="stat-label">Proxmox</div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Why HydrivaX</h2>
+      <p>Everything a container doesn't need is gone. What remains is a fast, headless foundation built for deploying your own services on demand.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Aggressively stripped</h3>
+        <p>No kernel modules, no firmware, no bootloader, no locales. The rootfs is trimmed to what an LXC container actually needs.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h3>On-demand modules</h3>
+        <p>Nothing is pre-installed. Run <code>hx-deploy docker</code> or any of 99 modules when you need them — remove them just as easily.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖥️</div>
+        <h3>Headless CLI first</h3>
+        <p>Built around <code>hx-deploy</code>, <code>hx-status</code>, and <code>hx-info</code>. A terminal-native experience for infrastructure operators.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>99 Deployable Modules</h2>
+      <p>Five categories covering networking, storage, development, monitoring, and automation.</p>
+    </div>
+    <div class="categories">
+      <a href="modules.html#networking" class="category-pill">Networking &amp; Security</a>
+      <a href="modules.html#storage" class="category-pill">Storage &amp; Data</a>
+      <a href="modules.html#dev" class="category-pill">Dev &amp; Coding</a>
+      <a href="modules.html#monitoring" class="category-pill">Monitoring &amp; Telemetry</a>
+      <a href="modules.html#automation" class="category-pill">Automation &amp; Utilities</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>CLI Tools</h2>
+      <p>Everything you need to manage and deploy from the terminal.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3><code>hx-deploy</code></h3>
+        <p>Install, remove, verify, list, and search across 99 modules. The core deployment engine.</p>
+      </div>
+      <div class="feature-card">
+        <h3><code>hx-status</code></h3>
+        <p>System dashboard showing CPU, RAM, disk usage, and running services at a glance.</p>
+      </div>
+      <div class="feature-card">
+        <h3><code>hx-info</code></h3>
+        <p>OS version, edition details, and system information in a clean branded output.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>MIT License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
+    <ul class="footer-links">
+      <li><a href="install.html">Install</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="specs.html">Specs</a></li>
+      <li><a href="download.html">Download</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

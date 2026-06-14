@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modules — HydrivaX</title>
+  <meta name="description" content="Browse all 99 HydrivaX deployable modules across networking, storage, dev, monitoring, and automation.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/logo-transparent.svg" alt="HydrivaX" width="36" height="36">
+      HydrivaX
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="install.html">Install</a></li>
+      <li><a href="modules.html" class="active">Modules</a></li>
+      <li><a href="specs.html">Specs</a></li>
+      <li><a href="download.html" class="nav-cta">Download</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>99 Deployable Modules</h1>
+    <p>Nothing is pre-installed. Install on demand with <code>hx-deploy &lt;module&gt;</code>.</p>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <input type="search" class="module-search" id="module-search" placeholder="Search modules…" aria-label="Search modules">
+
+    <div class="module-category" id="networking">
+      <h3>Networking &amp; Security (20)</h3>
+      <div class="module-grid">
+        <div class="module-item" data-name="wireguard"><strong>wireguard</strong><span>WireGuard VPN tunnel</span></div>
+        <div class="module-item" data-name="tailscale"><strong>tailscale</strong><span>Tailscale mesh VPN</span></div>
+        <div class="module-item" data-name="crowdsec"><strong>crowdsec</strong><span>CrowdSec collaborative IPS</span></div>
+        <div class="module-item" data-name="ufw"><strong>ufw</strong><span>Uncomplicated Firewall</span></div>
+        <div class="module-item" data-name="fail2ban"><strong>fail2ban</strong><span>Brute-force protection</span></div>
+        <div class="module-item" data-name="pihole"><strong>pihole</strong><span>DNS-level ad blocker</span></div>
+        <div class="module-item" data-name="nginx-proxy-manager"><strong>nginx-proxy-manager</strong><span>Reverse proxy with SSL</span></div>
+        <div class="module-item" data-name="tor"><strong>tor</strong><span>Tor anonymity relay/proxy</span></div>
+        <div class="module-item" data-name="i2p"><strong>i2p</strong><span>I2P anonymous network</span></div>
+        <div class="module-item" data-name="killswitch"><strong>killswitch</strong><span>Network kill switch (iptables)</span></div>
+        <div class="module-item" data-name="netbird"><strong>netbird</strong><span>NetBird zero-trust mesh</span></div>
+        <div class="module-item" data-name="nmap"><strong>nmap</strong><span>Network scanner</span></div>
+        <div class="module-item" data-name="lynis"><strong>lynis</strong><span>Security audit tool</span></div>
+        <div class="module-item" data-name="vault"><strong>vault</strong><span>HashiCorp Vault secrets manager</span></div>
+        <div class="module-item" data-name="ssh-hardening"><strong>ssh-hardening</strong><span>SSH hardening (keys-only)</span></div>
+        <div class="module-item" data-name="wipe"><strong>wipe</strong><span>Secure disk/file wiper</span></div>
+        <div class="module-item" data-name="iptables-persist"><strong>iptables-persist</strong><span>Persistent iptables rules</span></div>
+        <div class="module-item" data-name="certbot"><strong>certbot</strong><span>Let's Encrypt SSL</span></div>
+        <div class="module-item" data-name="zerotier"><strong>zerotier</strong><span>ZeroTier SD-WAN</span></div>
+        <div class="module-item" data-name="dnscrypt"><strong>dnscrypt</strong><span>Encrypted DNS proxy</span></div>
+      </div>
+    </div>
+
+    <div class="module-category" id="storage">
+      <h3>Storage &amp; Data (19)</h3>
+      <div class="module-grid">
+        <div class="module-item" data-name="restic"><strong>restic</strong><span>Encrypted backup engine</span></div>
+        <div class="module-item" data-name="syncthing"><strong>syncthing</strong><span>Continuous file sync</span></div>
+        <div class="module-item" data-name="minio"><strong>minio</strong><span>S3-compatible object storage</span></div>
+        <div class="module-item" data-name="immich"><strong>immich</strong><span>Self-hosted photo/video backup</span></div>
+        <div class="module-item" data-name="nextcloud"><strong>nextcloud</strong><span>Self-hosted cloud platform</span></div>
+        <div class="module-item" data-name="rclone"><strong>rclone</strong><span>Cloud storage Swiss army knife</span></div>
+        <div class="module-item" data-name="zfs"><strong>zfs</strong><span>ZFS filesystem tools</span></div>
+        <div class="module-item" data-name="btrfs"><strong>btrfs</strong><span>Btrfs filesystem tools</span></div>
+        <div class="module-item" data-name="ipfs"><strong>ipfs</strong><span>InterPlanetary File System</span></div>
+        <div class="module-item" data-name="sftp-jail"><strong>sftp-jail</strong><span>Jailed SFTP server</span></div>
+        <div class="module-item" data-name="samba"><strong>samba</strong><span>SMB/CIFS file shares</span></div>
+        <div class="module-item" data-name="nfs"><strong>nfs</strong><span>NFS server</span></div>
+        <div class="module-item" data-name="borgbackup"><strong>borgbackup</strong><span>Deduplicated backup</span></div>
+        <div class="module-item" data-name="duplicati"><strong>duplicati</strong><span>Cloud backup client</span></div>
+        <div class="module-item" data-name="lvm"><strong>lvm</strong><span>Logical Volume Manager</span></div>
+        <div class="module-item" data-name="mergerfs"><strong>mergerfs</strong><span>Union filesystem (drive pooling)</span></div>
+        <div class="module-item" data-name="snapraid"><strong>snapraid</strong><span>Snapshot RAID for data drives</span></div>
+        <div class="module-item" data-name="sqlite"><strong>sqlite</strong><span>SQLite database tools</span></div>
+        <div class="module-item" data-name="mariadb"><strong>mariadb</strong><span>MariaDB database server</span></div>
+      </div>
+    </div>
+
+    <div class="module-category" id="dev">
+      <h3>Dev &amp; Coding (20)</h3>
+      <div class="module-grid">
+        <div class="module-item" data-name="docker"><strong>docker</strong><span>Docker Engine + Compose v2</span></div>
+        <div class="module-item" data-name="podman"><strong>podman</strong><span>Daemonless container engine</span></div>
+        <div class="module-item" data-name="neovim"><strong>neovim</strong><span>Hyper-extensible text editor</span></div>
+        <div class="module-item" data-name="tmux"><strong>tmux</strong><span>Terminal multiplexer</span></div>
+        <div class="module-item" data-name="rustup"><strong>rustup</strong><span>Rust toolchain installer</span></div>
+        <div class="module-item" data-name="golang"><strong>golang</strong><span>Go programming language</span></div>
+        <div class="module-item" data-name="nvm"><strong>nvm</strong><span>Node.js version manager</span></div>
+        <div class="module-item" data-name="python3-venv"><strong>python3-venv</strong><span>Python 3 + venv + pip</span></div>
+        <div class="module-item" data-name="postgres"><strong>postgres</strong><span>PostgreSQL database server</span></div>
+        <div class="module-item" data-name="redis"><strong>redis</strong><span>Redis in-memory data store</span></div>
+        <div class="module-item" data-name="rabbitmq"><strong>rabbitmq</strong><span>RabbitMQ message broker</span></div>
+        <div class="module-item" data-name="gh-cli"><strong>gh-cli</strong><span>GitHub CLI</span></div>
+        <div class="module-item" data-name="gitea"><strong>gitea</strong><span>Self-hosted Git service</span></div>
+        <div class="module-item" data-name="drone-ci"><strong>drone-ci</strong><span>Drone CI/CD pipeline</span></div>
+        <div class="module-item" data-name="act"><strong>act</strong><span>Run GitHub Actions locally</span></div>
+        <div class="module-item" data-name="lazygit"><strong>lazygit</strong><span>Terminal UI for git</span></div>
+        <div class="module-item" data-name="lazydocker"><strong>lazydocker</strong><span>Terminal UI for Docker</span></div>
+        <div class="module-item" data-name="just"><strong>just</strong><span>Modern command runner</span></div>
+        <div class="module-item" data-name="aider"><strong>aider</strong><span>AI pair programming CLI</span></div>
+        <div class="module-item" data-name="dev-containers"><strong>dev-containers</strong><span>Docker dev containers</span></div>
+      </div>
+    </div>
+
+    <div class="module-category" id="monitoring">
+      <h3>Monitoring &amp; Telemetry (20)</h3>
+      <div class="module-grid">
+        <div class="module-item" data-name="prometheus"><strong>prometheus</strong><span>Metrics collection engine</span></div>
+        <div class="module-item" data-name="grafana"><strong>grafana</strong><span>Metrics visualization dashboard</span></div>
+        <div class="module-item" data-name="netdata"><strong>netdata</strong><span>Real-time performance monitoring</span></div>
+        <div class="module-item" data-name="uptime-kuma"><strong>uptime-kuma</strong><span>Self-hosted uptime monitor</span></div>
+        <div class="module-item" data-name="glances"><strong>glances</strong><span>System monitoring CLI</span></div>
+        <div class="module-item" data-name="zabbix-agent"><strong>zabbix-agent</strong><span>Zabbix monitoring agent</span></div>
+        <div class="module-item" data-name="healthchecks"><strong>healthchecks</strong><span>Cron job monitoring</span></div>
+        <div class="module-item" data-name="sysstat"><strong>sysstat</strong><span>System performance tools</span></div>
+        <div class="module-item" data-name="dstat"><strong>dstat</strong><span>Versatile resource stats</span></div>
+        <div class="module-item" data-name="node-exporter"><strong>node-exporter</strong><span>Prometheus hardware exporter</span></div>
+        <div class="module-item" data-name="cadvisor"><strong>cadvisor</strong><span>Container resource monitoring</span></div>
+        <div class="module-item" data-name="loki"><strong>loki</strong><span>Log aggregation system</span></div>
+        <div class="module-item" data-name="vector"><strong>vector</strong><span>High-perf log pipeline</span></div>
+        <div class="module-item" data-name="goaccess"><strong>goaccess</strong><span>Real-time web log analyzer</span></div>
+        <div class="module-item" data-name="telegraf"><strong>telegraf</strong><span>Metrics collection agent</span></div>
+        <div class="module-item" data-name="ntopng"><strong>ntopng</strong><span>Network traffic probe</span></div>
+        <div class="module-item" data-name="vnstat"><strong>vnstat</strong><span>Network traffic monitor</span></div>
+        <div class="module-item" data-name="iotop"><strong>iotop</strong><span>I/O usage monitor</span></div>
+        <div class="module-item" data-name="bpftrace"><strong>bpftrace</strong><span>Linux tracing tool</span></div>
+        <div class="module-item" data-name="ctop"><strong>ctop</strong><span>Container metrics viewer</span></div>
+      </div>
+    </div>
+
+    <div class="module-category" id="automation">
+      <h3>Automation &amp; Utilities (20)</h3>
+      <div class="module-grid">
+        <div class="module-item" data-name="ansible"><strong>ansible</strong><span>Ansible automation engine</span></div>
+        <div class="module-item" data-name="terraform"><strong>terraform</strong><span>Infrastructure as Code</span></div>
+        <div class="module-item" data-name="k3s"><strong>k3s</strong><span>Lightweight Kubernetes</span></div>
+        <div class="module-item" data-name="watchtower"><strong>watchtower</strong><span>Auto-update Docker containers</span></div>
+        <div class="module-item" data-name="portainer"><strong>portainer</strong><span>Docker management UI</span></div>
+        <div class="module-item" data-name="cloudflared"><strong>cloudflared</strong><span>Cloudflare Tunnel daemon</span></div>
+        <div class="module-item" data-name="cockpit"><strong>cockpit</strong><span>Web-based server manager</span></div>
+        <div class="module-item" data-name="traefik"><strong>traefik</strong><span>Cloud-native reverse proxy</span></div>
+        <div class="module-item" data-name="homepage"><strong>homepage</strong><span>Self-hosted app dashboard</span></div>
+        <div class="module-item" data-name="amud"><strong>amud</strong><span>AMUD-Dashboard</span></div>
+        <div class="module-item" data-name="cron-mgr"><strong>cron-mgr</strong><span>Interactive crontab manager</span></div>
+        <div class="module-item" data-name="taskfile"><strong>taskfile</strong><span>Task runner (Taskfile.yml)</span></div>
+        <div class="module-item" data-name="shellcheck"><strong>shellcheck</strong><span>Shell script linter</span></div>
+        <div class="module-item" data-name="auto-update"><strong>auto-update</strong><span>Unattended-upgrades config</span></div>
+        <div class="module-item" data-name="power-gov"><strong>power-gov</strong><span>CPU governor manager</span></div>
+        <div class="module-item" data-name="cpu-temp"><strong>cpu-temp</strong><span>CPU temperature monitor</span></div>
+        <div class="module-item" data-name="fsck-helper"><strong>fsck-helper</strong><span>Filesystem check utility</span></div>
+        <div class="module-item" data-name="hx-backup-svc"><strong>hx-backup-svc</strong><span>Automated backup scheduler</span></div>
+        <div class="module-item" data-name="logs-cleaner"><strong>logs-cleaner</strong><span>Automated log rotation/cleanup</span></div>
+        <div class="module-item" data-name="webmin"><strong>webmin</strong><span>System admin web interface</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>MIT License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
+    <ul class="footer-links">
+      <li><a href="install.html">Install</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="specs.html">Specs</a></li>
+      <li><a href="download.html">Download</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+document.getElementById('module-search').addEventListener('input', function () {
+  var q = this.value.toLowerCase();
+  document.querySelectorAll('.module-item').forEach(function (el) {
+    var text = (el.dataset.name + ' ' + el.textContent).toLowerCase();
+    el.style.display = text.includes(q) ? '' : 'none';
+  });
+  document.querySelectorAll('.module-category').forEach(function (cat) {
+    var visible = cat.querySelectorAll('.module-item:not([style*="none"])').length;
+    var hidden = cat.querySelectorAll('.module-item[style*="none"]').length;
+    var total = cat.querySelectorAll('.module-item').length;
+    cat.style.display = (q && hidden === total) ? 'none' : '';
+  });
+});
+</script>
+
+</body>
+</html>

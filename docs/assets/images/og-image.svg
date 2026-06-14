@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#012C57"/>
+  <rect width="1200" height="630" fill="url(#g)" opacity="0.4"/>
+  <defs>
+    <radialGradient id="g" cx="70%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#01DAFE" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#012C57" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <text x="80" y="280" fill="#01DAFE" font-family="system-ui,sans-serif" font-size="72" font-weight="700">HydrivaX</text>
+  <text x="80" y="360" fill="#e8f4fc" font-family="system-ui,sans-serif" font-size="32">Minimal headless Linux for self-hosted infrastructure</text>
+  <text x="80" y="420" fill="#8eb4cc" font-family="system-ui,sans-serif" font-size="24">99 MB Proxmox LXC template · Debian 12 · 99 modules</text>
+  <path d="M900 500 Q960 420 1020 500" stroke="#03A6DC" stroke-width="4" fill="none" opacity="0.6"/>
+</svg>

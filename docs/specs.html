@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specs — HydrivaX</title>
+  <meta name="description" content="HydrivaX technical specifications. Debian 12, 99 MB template, Proxmox LXC format.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/logo-transparent.svg" alt="HydrivaX" width="36" height="36">
+      HydrivaX
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="install.html">Install</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="specs.html" class="active">Specs</a></li>
+      <li><a href="download.html" class="nav-cta">Download</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Specifications</h1>
+    <p>Technical details for the HydrivaX LXC template.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <table class="specs-table">
+      <tr><td>Base OS</td><td>Debian 12 (Bookworm)</td></tr>
+      <tr><td>Template size</td><td>99 MB</td></tr>
+      <tr><td>Rootfs size</td><td>346 MB</td></tr>
+      <tr><td>Format</td><td>Proxmox LXC (.tar.zst)</td></tr>
+      <tr><td>Shell</td><td>bash</td></tr>
+      <tr><td>Edition</td><td>Headless CLI</td></tr>
+      <tr><td>Deploy modules</td><td>99</td></tr>
+      <tr><td>Pre-installed services</td><td>None</td></tr>
+      <tr><td>Target platform</td><td>Proxmox VE (LXC)</td></tr>
+      <tr><td>License</td><td>MIT</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>What's stripped</h2>
+      <p>HydrivaX removes everything a container doesn't need.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>No kernel modules</h3>
+        <p>Kernel modules are not needed inside an LXC container and are removed to save space.</p>
+      </div>
+      <div class="feature-card">
+        <h3>No firmware or bootloader</h3>
+        <p>Firmware blobs and bootloader packages are purged from the rootfs.</p>
+      </div>
+      <div class="feature-card">
+        <h3>No locales bloat</h3>
+        <p>Unnecessary locale data is stripped. The system stays lean and fast to deploy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>MIT License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
+    <ul class="footer-links">
+      <li><a href="install.html">Install</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="specs.html">Specs</a></li>
+      <li><a href="download.html">Download</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

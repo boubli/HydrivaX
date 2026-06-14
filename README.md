@@ -1,9 +1,10 @@
 <p align="center">
-  <img src="logo.png" alt="HydrivaX" width="200">
+  <img src="docs/assets/images/logo-colored.svg" alt="HydrivaX" width="200">
 </p>
 
 <h3 align="center">HydrivaX</h3>
 <p align="center">Minimal headless Linux for self-hosted infrastructure.<br>Ships as a Proxmox LXC template. 99 MB.</p>
+<p align="center"><a href="https://boubli.github.io/HydrivaX/">Website</a> · <a href="https://github.com/boubli/HydrivaX/releases">Download</a></p>
 
 ---
 
@@ -249,4 +250,3 @@ MIT — see [LICENSE](LICENSE).
 ## Author
 
 Youssef Boubli ([@boubli](https://github.com/boubli))
-"# HydrivaX" 
