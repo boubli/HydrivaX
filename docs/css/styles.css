@@ -63,21 +63,19 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  color: var(--navy-deep);
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: 0.02em;
+  width: 150px;
+  height: 42px;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .nav-brand img {
-  width: 34px;
-  height: 34px;
-  padding: 5px;
-  background: linear-gradient(135deg, var(--navy-deep), var(--navy-soft));
-  border: 1px solid rgba(1, 218, 254, 0.32);
-  border-radius: 10px;
-  box-shadow: 0 8px 22px rgba(1, 44, 87, 0.18);
+  width: 150px;
+  height: 150px;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 62%;
+  transform: translateY(-55px);
 }
 
 .nav-links {
