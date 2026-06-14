@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HydrivaX — Minimal Headless Linux for Self-Hosted Infrastructure</title>
-  <meta name="description" content="HydrivaX is a stripped-down Debian 12 LXC template for Proxmox. 99 MB, 99 deployable modules, zero bloat.">
+  <meta name="description" content="HydrivaX is a stripped-down Debian 12 base for self-hosted infrastructure. Proxmox LXC template and bootable server ISO.">
   <meta property="og:title" content="HydrivaX">
-  <meta property="og:description" content="Minimal headless Linux for self-hosted infrastructure. 99 MB Proxmox LXC template.">
+  <meta property="og:description" content="Minimal headless Linux for self-hosted infrastructure. LXC template and bootable OS ISO.">
   <meta property="og:image" content="assets/images/og-image.svg">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
@@ -32,9 +32,9 @@
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-content">
-      <span class="hero-badge">Proxmox LXC Template</span>
+      <span class="hero-badge">LXC Template · Bootable ISO</span>
       <h1>Minimal headless Linux for <span>self-hosted</span> infrastructure</h1>
-      <p class="hero-tagline">A stripped-down Debian 12 base with a modular CLI toolkit. No GUI, no desktop, no bloat — just a clean starting point. Ships at 99 MB.</p>
+      <p class="hero-tagline">A stripped-down Debian 12 base with a modular CLI toolkit. Deploy the 99 MB Proxmox template or boot the HydrivaX OS ISO on VMs and bare metal.</p>
       <div class="hero-actions">
         <a href="download.html" class="btn btn-primary">Download Release</a>
         <a href="install.html" class="btn btn-ghost">Install Guide</a>
@@ -48,7 +48,7 @@
       <div class="terminal-screen">
         <div class="terminal-content" aria-label="HydrivaX CLI preview">
           <div class="terminal-ascii">HYDRIVAX</div>
-          <div class="terminal-subtitle">Headless CLI Edition | Build v1.0</div>
+          <div class="terminal-subtitle">Headless CLI Edition | OS v1.2</div>
 
           <div class="terminal-command"><span>root@hydrivax:~#</span> hx-info</div>
           <div class="terminal-output">
@@ -56,6 +56,7 @@
             <div><span>Edition</span> Headless CLI</div>
             <div><span>Base</span> Debian 12 Bookworm</div>
             <div><span>Template</span> Proxmox LXC · 99 MB</div>
+            <div><span>ISO</span> Bootable server · ~565 MB</div>
           </div>
 
           <div class="terminal-command"><span>root@hydrivax:~#</span> hx-deploy list</div>
@@ -92,6 +93,10 @@
     <div class="stat-label">Debian 12</div>
   </div>
   <div class="stat-card">
+    <div class="stat-value">ISO</div>
+    <div class="stat-label">Bootable OS</div>
+  </div>
+  <div class="stat-card">
     <div class="stat-value">LXC</div>
     <div class="stat-label">Proxmox</div>
   </div>
@@ -113,6 +118,11 @@
         <div class="feature-icon">📦</div>
         <h3>On-demand modules</h3>
         <p>Nothing is pre-installed. Run <code>hx-deploy docker</code> or any of 99 modules when you need them — remove them just as easily.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💿</div>
+        <h3>Bootable OS ISO</h3>
+        <p>HydrivaX OS v1.2 ships as a Debian Live server image for VirtualBox, Proxmox VMs, mini PCs, and old hardware with text and serial boot entries.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🖥️</div>

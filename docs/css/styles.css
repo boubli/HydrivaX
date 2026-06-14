@@ -564,6 +564,49 @@ pre, code { font-family: var(--font-mono); }
 
 .download-meta strong { color: var(--cyan-bright); }
 
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.download-grid .download-card {
+  max-width: none;
+  position: relative;
+}
+
+.download-card--featured {
+  border-color: var(--cyan-bright);
+  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.15);
+}
+
+.download-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navy-deep);
+  background: var(--cyan-bright);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.download-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.download-note code {
+  color: var(--cyan-bright);
+  font-size: 0.85rem;
+}
+
 /* ── CLI showcase ── */
 .cli-showcase {
   margin-top: 1rem;

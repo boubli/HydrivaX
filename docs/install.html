@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Install — HydrivaX</title>
-  <meta name="description" content="Install HydrivaX on Proxmox. Upload the LXC template and deploy your first container.">
+  <meta name="description" content="Install HydrivaX from ISO or Proxmox LXC template. Boot on VMs, mini PCs, or deploy containers.">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -28,13 +28,69 @@
 
 <section class="page-hero">
   <div class="container">
-    <h1>Install on Proxmox</h1>
-    <p>Download the template, upload it to your Proxmox host, create a container, and start deploying modules.</p>
+    <h1>Install</h1>
+    <p>Boot HydrivaX OS from ISO or deploy the LXC template on Proxmox.</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="iso">
   <div class="container">
+    <div class="section-header">
+      <h2>Boot from ISO</h2>
+      <p>HydrivaX OS v1.2 — VirtualBox, Proxmox VMs, mini PCs, and old hardware.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Download the ISO</h3>
+          <p>Grab <code>HydrivaX-v1.2-Server-amd64.iso</code> from the <a href="download.html">Releases</a> page.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Attach to a VM or upload to Proxmox</h3>
+          <p>Mount the ISO as the optical drive and set boot order to CD/DVD first.</p>
+          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Recommended VM settings</h3>
+          <p><strong>Proxmox:</strong> SeaBIOS, i440fx, 1–2 GB RAM, VirtIO network. Enable <strong>Serial terminal 0</strong> if noVNC shows a black screen — then pick <em>Serial Console</em> at boot.</p>
+          <p><strong>VirtualBox:</strong> BIOS firmware, 1–2 GB RAM, VBoxSVGA or VMSVGA graphics.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Log in</h3>
+          <p>At the GRUB menu choose VGA Text, Serial Console, or Fail-safe. Credentials:</p>
+          <div class="code-block"><span class="prompt">user</span> live
+<span class="prompt">pass</span> hydrivax</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div>
+          <h3>First commands</h3>
+          <div class="code-block"><span class="prompt">$</span> hx-info
+<span class="prompt">$</span> hx-status
+<span class="prompt">$</span> hx-deploy list</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light" id="lxc">
+  <div class="container">
+    <div class="section-header">
+      <h2>Proxmox LXC template</h2>
+      <p>Deploy HydrivaX as a lightweight container on Proxmox VE.</p>
+    </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
@@ -73,7 +129,7 @@
   </div>
 </section>
 
-<section class="section section-light">
+<section class="section">
   <div class="container">
     <div class="section-header">
       <h2>What to expect</h2>

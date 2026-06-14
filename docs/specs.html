@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Specs — HydrivaX</title>
-  <meta name="description" content="HydrivaX technical specifications. Debian 12, 99 MB template, Proxmox LXC format.">
+  <meta name="description" content="HydrivaX technical specifications for the LXC template and bootable OS ISO.">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -29,12 +29,37 @@
 <section class="page-hero">
   <div class="container">
     <h1>Specifications</h1>
-    <p>Technical details for the HydrivaX LXC template.</p>
+    <p>Technical details for both HydrivaX editions.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
+    <div class="section-header">
+      <h2>HydrivaX OS v1.2</h2>
+      <p>Bootable headless server ISO — Debian Live, amd64.</p>
+    </div>
+    <table class="specs-table">
+      <tr><td>Base OS</td><td>Debian 12 (Bookworm) Live</td></tr>
+      <tr><td>ISO size</td><td>~565 MB</td></tr>
+      <tr><td>Format</td><td>Bootable amd64 ISO (BIOS + EFI)</td></tr>
+      <tr><td>Architecture</td><td>x86_64 (amd64)</td></tr>
+      <tr><td>Edition</td><td>Headless CLI (text-only, no desktop)</td></tr>
+      <tr><td>Live user</td><td><code>live</code> / <code>hydrivax</code></td></tr>
+      <tr><td>Boot entries</td><td>VGA Text, Serial Console, Fail-safe</td></tr>
+      <tr><td>Min RAM</td><td>512 MB (1 GB recommended)</td></tr>
+      <tr><td>Target</td><td>VirtualBox, Proxmox VE, mini PCs, old hardware</td></tr>
+      <tr><td>License</td><td>MIT</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>LXC Template v2.0</h2>
+      <p>Proxmox container template — stripped rootfs.</p>
+    </div>
     <table class="specs-table">
       <tr><td>Base OS</td><td>Debian 12 (Bookworm)</td></tr>
       <tr><td>Template size</td><td>99 MB</td></tr>
@@ -50,11 +75,11 @@
   </div>
 </section>
 
-<section class="section section-light">
+<section class="section">
   <div class="container">
     <div class="section-header">
-      <h2>What's stripped</h2>
-      <p>HydrivaX removes everything a container doesn't need.</p>
+      <h2>What's stripped (LXC)</h2>
+      <p>The LXC template removes everything a container doesn't need.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">

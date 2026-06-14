@@ -3,16 +3,23 @@
 </p>
 
 <h3 align="center">HydrivaX</h3>
-<p align="center">Minimal headless Linux for self-hosted infrastructure.<br>Ships as a Proxmox LXC template. 99 MB.</p>
+<p align="center">Minimal headless Linux for self-hosted infrastructure.<br>Proxmox LXC template · bootable server ISO</p>
 <p align="center"><a href="https://boubli.github.io/HydrivaX/">Website</a> · <a href="https://github.com/boubli/HydrivaX/releases">Download</a></p>
 
 ---
 
 ## What is this
 
-HydrivaX is a stripped-down Debian 12 base with a modular CLI toolkit for deploying services on LXC containers. No GUI, no desktop, no bloat — just a clean starting point for running your own stuff.
+HydrivaX is a stripped-down Debian 12 base with a modular CLI toolkit for deploying services. No GUI, no desktop, no bloat — just a clean starting point for running your own stuff.
 
-The rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. Everything a container doesn't need is gone.
+Two editions are supported:
+
+| Edition | Format | Size | Use case |
+|---------|--------|------|----------|
+| **HydrivaX OS** | bootable `.iso` | ~565 MB | Old PCs, mini PCs, VirtualBox, Proxmox VMs |
+| **LXC Template** | `.tar.zst` | 99 MB | Proxmox containers |
+
+The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The OS ISO is a text-only Debian Live server image with HydrivaX branding and CLI tools pre-installed.
 
 ## CLI
 
@@ -80,6 +87,30 @@ hx-deploy verify docker  # check if it's working
 | `hx-update` | Update system packages |
 
 ## Install
+
+### HydrivaX OS ISO
+
+Download `HydrivaX-v1.2-Server-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
+
+```bash
+# proxmox — upload ISO to template store
+scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/
+```
+
+Live credentials:
+
+```text
+user: live
+pass: hydrivax
+```
+
+Recommended boot entries:
+
+- **VGA Text** for VirtualBox, Proxmox noVNC, and monitors
+- **Serial Console** for Proxmox serial terminal and headless machines
+- **Fail-safe** for older or difficult hardware
+
+### LXC template
 
 Download `HydrivaX-v2.0-LXC.tar.zst` from [Releases](https://github.com/boubli/HydrivaX/releases).
 
@@ -235,13 +266,14 @@ hx-deploy list
 
 ## Specs
 
-| | |
-|---|---|
-| Base | Debian 12 (Bookworm) |
-| Template size | 99 MB |
-| Rootfs size | 346 MB |
-| Format | Proxmox LXC (.tar.zst) |
-| Shell | bash |
+| | HydrivaX OS ISO | LXC Template |
+|---|---|---|
+| Base | Debian 12 Live (Bookworm) | Debian 12 (Bookworm) |
+| Size | ~565 MB | 99 MB compressed |
+| Format | Bootable amd64 ISO | Proxmox LXC `.tar.zst` |
+| Target | VMs, mini PCs, old hardware | Proxmox containers |
+| Shell | bash | bash |
+| Edition | Headless CLI, text-only live | Headless CLI |
 
 ## License
 
