@@ -37,7 +37,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Server ISO: VM or Bare Metal</h2>
-      <p><code>HydrivaX-v2.0-Server-amd64.iso</code> boots live first, then installs permanently with <code>hx-deploy install</code>.</p>
+      <p><code>HydrivaX-v2.0-Server-amd64.iso</code> boots live first. Pick <strong>Install HydrivaX OS v2.0 to Disk</strong> from the GRUB menu, or log in and run <code>hx-deploy install</code>.</p>
     </div>
     <div class="steps">
       <div class="step">
@@ -49,7 +49,7 @@ Get-FileHash HydrivaX-v2.0-Server-amd64.iso -Algorithm SHA256
 
 <span class="prompt"># Linux / macOS</span>
 sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
-          <p>Expected SHA256: <code>73f68ef95bc8175b4b53373b2bb1e7d4ce9da7d97c31b9d11999211b47d89bf5</code></p>
+          <p>Expected SHA256: <code>1f563cecb658a752fe7908fd65d5138854db1fb127ed40c5203d830638e890cb</code></p>
         </div>
       </div>
       <div class="step">
@@ -59,6 +59,7 @@ sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
           <p>Use Proxmox VM, VirtualBox, VMware, or a flashed USB drive for physical machines. For Proxmox, upload the ISO:</p>
           <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v2.0-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/</div>
           <p>Recommended VM settings: BIOS/SeaBIOS, 1-2 vCPU, 1-2 GB RAM, 10-20 GB disk, SATA/SCSI/VirtIO disk, NAT or bridged network.</p>
+          <p>At the GRUB menu, select <strong>Install HydrivaX OS v2.0 to Disk</strong> (hotkey <kbd>i</kbd>). For Proxmox serial console, use <strong>Install HydrivaX OS v2.0 to Disk - Serial</strong>. The native installer starts immediately on tty1.</p>
         </div>
       </div>
       <div class="step">
@@ -73,10 +74,12 @@ sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
         <div class="step-num">4</div>
         <div>
           <h3>Install permanently to disk</h3>
-          <p>The installer wipes the selected disk, creates an MBR/ext4 root partition, clones the live system with <code>rsync -aAXv</code>, writes UUID-based <code>/etc/fstab</code>, and installs GRUB.</p>
-          <div class="code-block"><span class="prompt">$</span> sudo hx-deploy install
+          <p>The installer wipes the selected disk, creates a universal GPT layout with BIOS boot, EFI, and ext4 root partitions, clones the live system with <code>rsync -aAXv</code>, writes UUID-based <code>/etc/fstab</code>, and installs GRUB for BIOS and UEFI.</p>
+          <div class="code-block"><span class="prompt">$</span> hx install
 
-<span class="prompt"># direct command also works</span>
+<span class="prompt"># direct commands also work</span>
+sudo hx-deploy install
+
 sudo hx-install</div>
           <p>Examples of valid target disks: <code>/dev/sda</code>, <code>/dev/vda</code>, <code>/dev/nvme0n1</code>, <code>/dev/mmcblk0</code>.</p>
         </div>
@@ -96,7 +99,7 @@ sudo hx-install</div>
   <div class="container">
     <div class="section-header">
       <h2>Desktop ISO: HydrivaX GUI</h2>
-      <p><code>HydrivaX-v2.0-Desktop-amd64.iso</code> includes HydrivaX Desktop Core and opens the installer automatically on first desktop boot.</p>
+      <p><code>HydrivaX-v2.0-Desktop-amd64.iso</code> includes HydrivaX Desktop Core. Use <strong>Install HydrivaX OS v2.0 to Disk</strong> in the GRUB menu for a headless install, or boot <strong>VGA Text</strong> to explore the live desktop.</p>
     </div>
     <div class="steps">
       <div class="step">
@@ -108,26 +111,33 @@ Get-FileHash HydrivaX-v2.0-Desktop-amd64.iso -Algorithm SHA256
 
 <span class="prompt"># Linux / macOS</span>
 sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
-          <p>Expected SHA256: <code>ec2a7466e7adcf5d99f39470a8026597662adb26bbfd63593789d1a184594fed</code></p>
+          <p>Expected SHA256: <code>6a977b614aeb135df0026cba692b1bbfd30f9417db605000e1276b6cdbccd2c6</code></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div>
-          <h3>Boot to HydrivaX Desktop</h3>
-          <p>The desktop ISO autologins to the live desktop. You do not need to log in first. A terminal installer opens automatically.</p>
+          <h3>Install from the GRUB menu (recommended)</h3>
+          <p>Select <strong>Install HydrivaX OS v2.0 to Disk</strong> at boot. This skips the desktop and runs the same text installer used on the Server ISO.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div>
-          <h3>Install from the desktop</h3>
-          <p>Use the automatic installer window, or click <strong>Install HydrivaX OS</strong> on the desktop/dock. It runs the same production installer:</p>
-          <div class="code-block"><span class="prompt">$</span> sudo hx-install</div>
+          <h3>Or boot to HydrivaX Desktop</h3>
+          <p>Choose <strong>HydrivaX OS v2.0 - VGA Text</strong> to autologin to the live desktop. A terminal installer opens automatically.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
+        <div>
+          <h3>Install from the desktop</h3>
+          <p>Use the automatic installer window, or click <strong>Install HydrivaX OS</strong> on the desktop/dock. It runs the same production installer:</p>
+          <div class="code-block"><span class="prompt">$</span> hx install</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
         <div>
           <h3>Explore the GUI</h3>
           <p>The live desktop includes a HydrivaX wallpaper, custom dock icons, HydrivaX apps, terminal fastfetch output, browser, settings, and file manager.</p>
@@ -150,7 +160,7 @@ sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
       </div>
       <div class="feature-card">
         <h3><code>hx-install</code></h3>
-        <p>Native disk installer. Handles SATA/SCSI/VirtIO, NVMe, eMMC, MBR partitioning, ext4 formatting, rsync clone, UUID fstab, and GRUB.</p>
+        <p>Native disk installer. Handles SATA/SCSI/VirtIO, NVMe, eMMC, universal GPT partitioning, ext4 formatting, rsync clone, UUID fstab, and BIOS/UEFI GRUB.</p>
       </div>
       <div class="feature-card">
         <h3><code>hydrivax-install</code></h3>

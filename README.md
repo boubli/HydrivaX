@@ -16,11 +16,11 @@ Two editions are supported:
 
 | Edition | Format | Size | Use case |
 |---------|--------|------|----------|
-| **HydrivaX OS Server** | bootable `.iso` | 574 MB | Servers, old PCs, mini PCs, VirtualBox, Proxmox VMs |
-| **HydrivaX OS Desktop** | bootable `.iso` | 1020 MB | HydrivaX graphical desktop for VMs and physical machines |
+| **HydrivaX OS Server** | bootable `.iso` | 586 MB | Servers, old PCs, mini PCs, VirtualBox, Proxmox VMs |
+| **HydrivaX OS Desktop** | bootable `.iso` | 1.1 GB | HydrivaX graphical desktop for VMs and physical machines |
 | **LXC Template** | `.tar.zst` | 99 MB | Proxmox containers |
 
-The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The Server ISO is CLI-first and installable with `hx-deploy install`. The Desktop ISO adds HydrivaX Desktop Core and launches the installer automatically on first desktop boot.
+The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The Server ISO is CLI-first and installable with `hx install` or `hx-deploy install`. The Desktop ISO adds HydrivaX Desktop Core and launches the installer automatically on first desktop boot.
 
 ## CLI
 
@@ -86,6 +86,8 @@ hx-deploy verify docker  # check if it's working
 | `hx-status` | System dashboard (CPU, RAM, disk, services) |
 | `hx-info` | OS version and system info |
 | `hx-update` | Update system packages |
+| `hx install` | Easy command to install HydrivaX OS permanently to disk |
+| `hx gui` | Easy command to install HydrivaX Desktop Core |
 | `hx-deploy install` | Install HydrivaX OS permanently to disk |
 | `hx-install` | Native disk installer used by Server/Desktop ISOs |
 | `hydrivax-install` | Compatibility alias for `hx-install` |
@@ -121,6 +123,8 @@ pass: hydrivax
 Install permanently:
 
 ```bash
+hx install
+# or
 sudo hx-deploy install
 # or
 sudo hx-install
@@ -133,7 +137,7 @@ Download `HydrivaX-v2.0-Desktop-amd64.iso` from [Releases](https://github.com/bo
 Boot the ISO and the HydrivaX Desktop Core live session starts automatically. The installer opens on first desktop boot, or you can launch it from the dock/desktop shortcut:
 
 ```bash
-sudo hx-install
+hx install
 ```
 
 Recommended boot entries:
@@ -300,10 +304,10 @@ hx-deploy list
 | | Server ISO | Desktop ISO | LXC Template |
 |---|---|---|---|
 | Base | Debian 12 Live | Debian 12 Live | Debian 12 |
-| Size | 574 MB | 1020 MB | 99 MB compressed |
+| Size | 586 MB | 1.1 GB | 99 MB compressed |
 | Format | Bootable amd64 ISO | Bootable amd64 ISO | Proxmox LXC `.tar.zst` |
 | Target | VMs, mini PCs, old hardware | GUI desktops, laptops, VMs | Proxmox containers |
-| Installer | `hx-deploy install` / `hx-install` | automatic first-boot installer | not included |
+| Installer | `hx install` / `hx-deploy install` / `hx-install` | GRUB installer + automatic first-boot installer | not included |
 | Edition | Headless CLI server | HydrivaX Desktop Core | Headless CLI container |
 
 ## License

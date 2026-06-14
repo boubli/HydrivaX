@@ -41,15 +41,15 @@
     </div>
     <table class="specs-table">
       <tr><td>Base OS</td><td>Debian 12 (Bookworm) Live</td></tr>
-      <tr><td>ISO size</td><td>574 MB</td></tr>
+      <tr><td>ISO size</td><td>586 MB</td></tr>
       <tr><td>Format</td><td>Bootable amd64 ISO</td></tr>
       <tr><td>Edition</td><td>Headless CLI server</td></tr>
-      <tr><td>Install command</td><td><code>sudo hx-deploy install</code> or <code>sudo hx-install</code></td></tr>
-      <tr><td>Partition layout</td><td>MBR/msdos + single ext4 root partition</td></tr>
-      <tr><td>Bootloader</td><td>GRUB installed to target disk</td></tr>
+      <tr><td>Install command</td><td><code>hx install</code>, <code>sudo hx-deploy install</code>, or <code>sudo hx-install</code></td></tr>
+      <tr><td>Partition layout</td><td>GPT with BIOS boot, EFI, and ext4 root partitions</td></tr>
+      <tr><td>Bootloader</td><td>GRUB installed for BIOS and removable UEFI boot</td></tr>
       <tr><td>Live user</td><td><code>live</code> / <code>hydrivax</code></td></tr>
       <tr><td>Target</td><td>Proxmox VM, VirtualBox, VMware, mini PCs, old desktops, bare metal</td></tr>
-      <tr><td>SHA256</td><td><code style="font-size:0.75rem;word-break:break-all;">73f68ef95bc8175b4b53373b2bb1e7d4ce9da7d97c31b9d11999211b47d89bf5</code></td></tr>
+      <tr><td>SHA256</td><td><code style="font-size:0.75rem;word-break:break-all;">1f563cecb658a752fe7908fd65d5138854db1fb127ed40c5203d830638e890cb</code></td></tr>
     </table>
   </div>
 </section>
@@ -62,14 +62,14 @@
     </div>
     <table class="specs-table">
       <tr><td>Base OS</td><td>Debian 12 (Bookworm) Live</td></tr>
-      <tr><td>ISO size</td><td>1020 MB</td></tr>
+      <tr><td>ISO size</td><td>1.1 GB</td></tr>
       <tr><td>Desktop</td><td>XFCE + HydrivaX Desktop Core custom UI</td></tr>
       <tr><td>Login</td><td>Live desktop autologin</td></tr>
       <tr><td>Installer UX</td><td>Installer launches automatically on first desktop boot</td></tr>
       <tr><td>Included UI</td><td>HydrivaX wallpaper, dock, branded app launchers, terminal fastfetch output</td></tr>
-      <tr><td>Install command</td><td><code>sudo hx-install</code></td></tr>
+      <tr><td>Install command</td><td><code>hx install</code> or desktop installer launcher</td></tr>
       <tr><td>Target</td><td>VMs, laptops, mini PCs, desktop PCs, bare metal</td></tr>
-      <tr><td>SHA256</td><td><code style="font-size:0.75rem;word-break:break-all;">ec2a7466e7adcf5d99f39470a8026597662adb26bbfd63593789d1a184594fed</code></td></tr>
+      <tr><td>SHA256</td><td><code style="font-size:0.75rem;word-break:break-all;">6a977b614aeb135df0026cba692b1bbfd30f9417db605000e1276b6cdbccd2c6</code></td></tr>
     </table>
   </div>
 </section>
