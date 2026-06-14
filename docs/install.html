@@ -37,7 +37,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Boot from ISO</h2>
-      <p>HydrivaX OS v1.2 — VirtualBox, Proxmox VMs, mini PCs, and physical hardware.</p>
+      <p>HydrivaX OS v1.2 — VirtualBox, Proxmox VMs, VMware, mini PCs, and physical hardware.</p>
     </div>
 
     <!-- Installation Options Overview -->
@@ -69,38 +69,70 @@
       <div class="step">
         <div class="step-num">1</div>
         <div>
-          <h3>Download the ISO</h3>
-          <p>Grab <code>HydrivaX-v1.2-Server-amd64.iso</code> from the <a href="download.html">Download</a> page. Ensure you verify the SHA256 checksum to guarantee a clean and corruption-free image.</p>
+          <h3>Download the ISO & Verify</h3>
+          <p>Grab <code>HydrivaX-v1.2-Server-amd64.iso</code> from the <a href="download.html">Download</a> page. To guarantee a clean, uncorrupted image, verify the SHA256 checksum in your terminal:</p>
+          <div class="code-block"><span class="prompt"># Windows (PowerShell)</span>
+Get-FileHash HydrivaX-v1.2-Server-amd64.iso -Algorithm SHA256
+
+<span class="prompt"># Linux / macOS (Terminal)</span>
+sha256sum HydrivaX-v1.2-Server-amd64.iso</div>
+          <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">Compare the output hash with the checksums listed on the downloads page.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div>
           <h3>Prepare Boot Medium</h3>
-          <p><strong>For VMs (Proxmox VE):</strong> Upload the ISO to your ISO library (e.g., local storage) via the Proxmox Web UI, or use SCP:</p>
-          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/</div>
-          <p style="margin-top: 1rem;"><strong>For Physical Hardware:</strong> Write the ISO to a USB flash drive (8GB+ recommended) using <strong>Rufus</strong> (use DD image mode if prompted) or <strong>BalenaEtcher</strong>.</p>
+          <p>Choose the method below that matches your deployment target:</p>
+          <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted); line-height: 1.6;">
+            <li><strong>For Proxmox VE (VM):</strong> Upload the ISO via the Proxmox Web UI (Local storage → ISO Images → Upload) or copy it directly using SCP:
+              <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/</div>
+            </li>
+            <li style="margin-top: 0.75rem;"><strong>For VirtualBox & VMware:</strong> Save the ISO in a permanent folder on your host machine.</li>
+            <li style="margin-top: 0.75rem;"><strong>For Physical Hardware (USB Flashing):</strong> Flash the ISO to a USB flash drive (8GB+ recommended). 
+              <br><em>Tools:</em> Use **Rufus** (Windows - select ISO mode, re-flash in DD mode if boot fails), **BalenaEtcher** (Cross-platform), or **Ventoy** (simply drag and drop the ISO onto the Ventoy drive).
+            </li>
+          </ul>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div>
-          <h3>Configure Settings & Boot</h3>
-          <p><strong>For Virtual Machines:</strong> Create a new KVM VM. Assign 1–2 vCPUs, 1–2 GB RAM, and a VirtIO Network interface. Under hardware, add a CD/DVD drive, mount the ISO, and set it first in the Boot Order settings.</p>
-          <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);"><em>Pro Tip:</em> In Proxmox, add a <strong>Serial terminal 0</strong> and set display to <code>Serial terminal 0</code> if you get a black screen in noVNC.</p>
+          <h3>Platform Configuration</h3>
+          <p>Set up your environment settings according to the platform you are deploying on:</p>
           
-          <p style="margin-top: 1rem;"><strong>For Physical Hardware:</strong> Plug the USB drive into your target machine. Power it on and immediately press the Boot Menu key (often <strong>F12</strong>, <strong>F11</strong>, <strong>F8</strong>, or <strong>Esc</strong>). Select your USB drive from the boot options.</p>
-          <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);"><em>Pro Tip:</em> Enter BIOS settings and <strong>disable Secure Boot</strong>. Custom live images can sometimes be blocked by UEFI secure boot keys.</p>
+          <div style="margin-top: 1rem; padding-left: 0.75rem; border-left: 2px solid var(--blue-accent);">
+            <strong style="color: var(--cyan-bright);">Proxmox VE (KVM VM):</strong>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">Create a VM. Allocate 1–2 vCPUs (Host type recommended), 1–2 GB RAM, and 10–20 GB storage. Attach the ISO to the CD/DVD drive.
+            <br><em>Important:</em> To avoid black screen issues in noVNC, add a <strong>Serial terminal 0</strong> in the hardware settings and set display to <code>Serial terminal 0</code>.</p>
+          </div>
+
+          <div style="margin-top: 1rem; padding-left: 0.75rem; border-left: 2px solid var(--blue-accent);">
+            <strong style="color: var(--cyan-bright);">VirtualBox:</strong>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">Create a new VM, select type <code>Linux</code> and version <code>Debian (64-bit)</code>. Allocate 1 CPU and 1–2 GB RAM. Mount the ISO under Storage settings.
+            <br><em>Tip:</em> Ensure <strong>Enable EFI</strong> is unchecked in System settings, and set the Graphics Controller to <code>VBoxSVGA</code> or <code>VMSVGA</code> under Display.</p>
+          </div>
+
+          <div style="margin-top: 1rem; padding-left: 0.75rem; border-left: 2px solid var(--blue-accent);">
+            <strong style="color: var(--cyan-bright);">VMware Workstation / Player:</strong>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">Create a VM with typical configuration, select installer disc image (ISO), and point to the HydrivaX ISO. Choose Guest OS <code>Linux</code> and version <code>Debian 12 64-bit</code>. Allocate 1 CPU, 1-2 GB RAM, and set Network Connection to <code>NAT</code> or <code>Bridged</code>.</p>
+          </div>
+
+          <div style="margin-top: 1rem; padding-left: 0.75rem; border-left: 2px solid var(--blue-accent);">
+            <strong style="color: var(--cyan-bright);">Physical Hardware (Bare Metal / Mini PC):</strong>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">Insert the flashed USB drive. Power on the machine and immediately press the Boot Menu hotkey (F12, F11, F8, F9, or Esc depending on manufacturer). Select the USB boot option.
+            <br><em>Tip:</em> Enter BIOS (Del or F2) and **disable Secure Boot**. You may also need to enable Legacy Support/CSM if using older legacy boot modes.</p>
+          </div>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div>
-          <h3>Log in</h3>
-          <p>At the GRUB boot menu, choose one of the following boot entries:</p>
+          <h3>Boot & Log in</h3>
+          <p>Start the VM or physical machine. At the GRUB boot menu, choose your console option:</p>
           <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted); line-height: 1.6;">
-            <li><strong>VGA Text:</strong> Standard console output (recommended for VirtualBox and local monitors).</li>
-            <li><strong>Serial Console:</strong> Directs boot logs to serial ttyS0 console (recommended for headless Proxmox VM consoles).</li>
+            <li><strong>VGA Text:</strong> Standard console output (best for VirtualBox, VMware, and physical monitors).</li>
+            <li><strong>Serial Console:</strong> Redirects boot output to serial ttyS0 (best for headless servers and Proxmox noVNC serial console).</li>
             <li><strong>Fail-safe:</strong> Safe mode using basic drivers for older or difficult hardware.</li>
           </ul>
           <p>Once loaded, log in with the live system credentials:</p>

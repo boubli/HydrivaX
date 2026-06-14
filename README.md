@@ -88,6 +88,8 @@ hx-deploy verify docker  # check if it's working
 
 ## Install
 
+For a detailed, step-by-step guide with screenshots for Proxmox (LXC/VM), VirtualBox, VMware, and physical hardware, check out the [Full Installation Guide](https://boubli.github.io/HydrivaX/install.html).
+
 ### HydrivaX OS ISO
 
 Download `HydrivaX-v1.2-Server-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
