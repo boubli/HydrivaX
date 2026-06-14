@@ -551,15 +551,19 @@ pre, code { font-family: var(--font-mono); }
   margin: 0 auto;
   text-align: center;
   padding: 2.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-glow);
+  background: #ffffff;
+  border: 1px solid rgba(1, 76, 129, 0.12);
   border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(1, 44, 87, 0.08);
 }
 
-.download-card h2 { margin-bottom: 0.75rem; }
+.download-card h2 {
+  margin-bottom: 0.75rem;
+  color: var(--navy-deep);
+}
 
 .download-card p {
-  color: var(--text-muted);
+  color: #5a7a94;
   margin-bottom: 1.5rem;
 }
 
@@ -569,10 +573,10 @@ pre, code { font-family: var(--font-mono); }
   gap: 2rem;
   margin-top: 1.5rem;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #5a7a94;
 }
 
-.download-meta strong { color: var(--cyan-bright); }
+.download-meta strong { color: var(--blue-accent); }
 
 .download-grid {
   display: grid;
@@ -588,8 +592,8 @@ pre, code { font-family: var(--font-mono); }
 }
 
 .download-card--featured {
-  border-color: var(--cyan-bright);
-  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.15);
+  border-color: var(--cyan-mid);
+  box-shadow: 0 12px 48px rgba(1, 131, 185, 0.12);
 }
 
 .download-badge {
@@ -609,11 +613,11 @@ pre, code { font-family: var(--font-mono); }
 .download-note {
   margin-top: 1rem;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #5a7a94;
 }
 
 .download-note code {
-  color: var(--cyan-bright);
+  color: var(--blue-accent);
   font-size: 0.85rem;
 }
 
