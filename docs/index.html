@@ -40,13 +40,35 @@
         <a href="install.html" class="btn btn-ghost">Install Guide</a>
       </div>
     </div>
-    <div class="hero-visual cli-showcase terminal-frame">
+    <div class="hero-visual cli-showcase terminal-frame hero-terminal">
       <div class="terminal-titlebar">
         <span></span><span></span><span></span>
         <strong>root@hydrivax:~</strong>
       </div>
       <div class="terminal-screen">
-        <img src="assets/images/HydrivaX_CLI.png" alt="HydrivaX CLI showing the real MOTD and hx-info output" width="1024" height="379">
+        <div class="terminal-content" aria-label="HydrivaX CLI preview">
+          <div class="terminal-ascii">HYDRIVAX</div>
+          <div class="terminal-subtitle">Headless CLI Edition | Build v1.0</div>
+
+          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-info</div>
+          <div class="terminal-output">
+            <div><span>Core Architect</span> Youssef Boubli</div>
+            <div><span>Edition</span> Headless CLI</div>
+            <div><span>Base</span> Debian 12 Bookworm</div>
+            <div><span>Template</span> Proxmox LXC · 99 MB</div>
+          </div>
+
+          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-deploy list</div>
+          <div class="terminal-modules">
+            <span>wireguard</span>
+            <span>docker</span>
+            <span>grafana</span>
+            <span>nextcloud</span>
+            <span>k3s</span>
+            <span>restic</span>
+          </div>
+          <div class="terminal-status">99 modules available · nothing pre-installed · deploy on demand</div>
+        </div>
       </div>
     </div>
   </div>
