@@ -10,17 +10,17 @@
 
 ## What is this
 
-HydrivaX is a stripped-down Debian 12 base with a modular CLI toolkit for deploying services. It now ships as installable v2.0 OS images for VMs/bare metal and as a lightweight Proxmox LXC template.
+HydrivaX is a lightweight infrastructure OS with a modular CLI toolkit for deploying services. It now ships as installable v2.0 OS images for VMs/bare metal and as a lightweight Proxmox LXC template.
 
 Two editions are supported:
 
 | Edition | Format | Size | Use case |
 |---------|--------|------|----------|
 | **HydrivaX OS Server** | bootable `.iso` | 586 MB | Servers, old PCs, mini PCs, VirtualBox, Proxmox VMs |
-| **HydrivaX OS Desktop** | bootable `.iso` | 1.1 GB | HydrivaX graphical desktop for VMs and physical machines |
+| **HydrivaX OS Desktop** | bootable `.iso` | 1008 MB | HydrivaX graphical desktop for VMs and physical machines |
 | **LXC Template** | `.tar.zst` | 99 MB | Proxmox containers |
 
-The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The Server ISO is CLI-first and installable with `hx install` or `hx-deploy install`. The Desktop ISO adds HydrivaX Desktop Core and launches the installer automatically on first desktop boot.
+The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The Server ISO is CLI-only and installable with `hx install` or `hx-deploy install`; it does not include GUI packages or a GUI install command. The Desktop ISO adds HydrivaX Desktop Core and launches the installer automatically on first desktop boot.
 
 ## CLI
 
@@ -87,7 +87,7 @@ hx-deploy verify docker  # check if it's working
 | `hx-info` | OS version and system info |
 | `hx-update` | Update system packages |
 | `hx install` | Easy command to install HydrivaX OS permanently to disk |
-| `hx gui` | Easy command to install HydrivaX Desktop Core |
+| `hx gui` | Desktop-capable builds only; not included on the Server ISO |
 | `hx-deploy install` | Install HydrivaX OS permanently to disk |
 | `hx-install` | Native disk installer used by Server/Desktop ISOs |
 | `hydrivax-install` | Compatibility alias for `hx-install` |
@@ -114,9 +114,9 @@ Download `HydrivaX-v2.0-Server-amd64.iso` from [Releases](https://github.com/bou
 3. Access the boot menu (F12, F11, F8, Esc) and boot from USB.
 4. *Tip:* Enter your BIOS/UEFI settings and **disable Secure Boot**.
 
-Live credentials:
+Root credentials:
 ```text
-user: live
+user: root
 pass: hydrivax
 ```
 
@@ -134,7 +134,7 @@ sudo hx-install
 
 Download `HydrivaX-v2.0-Desktop-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
 
-Boot the ISO and the HydrivaX Desktop Core live session starts automatically. The installer opens on first desktop boot, or you can launch it from the dock/desktop shortcut:
+Boot the ISO and the HydrivaX Desktop Core session starts automatically. The installer opens on first desktop boot, or you can launch it from the dock/desktop shortcut:
 
 ```bash
 hx install
@@ -303,8 +303,8 @@ hx-deploy list
 
 | | Server ISO | Desktop ISO | LXC Template |
 |---|---|---|---|
-| Base | Debian 12 Live | Debian 12 Live | Debian 12 |
-| Size | 586 MB | 1.1 GB | 99 MB compressed |
+| Base | HydrivaX OS v2.0 Server | HydrivaX OS v2.0 Desktop | HydrivaX OS v2.0 LXC |
+| Size | 586 MB | 1008 MB | 99 MB compressed |
 | Format | Bootable amd64 ISO | Bootable amd64 ISO | Proxmox LXC `.tar.zst` |
 | Target | VMs, mini PCs, old hardware | GUI desktops, laptops, VMs | Proxmox containers |
 | Installer | `hx install` / `hx-deploy install` / `hx-install` | GRUB installer + automatic first-boot installer | not included |

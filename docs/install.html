@@ -37,7 +37,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Server ISO: VM or Bare Metal</h2>
-      <p><code>HydrivaX-v2.0-Server-amd64.iso</code> boots live first. Pick <strong>Install HydrivaX OS v2.0 to Disk</strong> from the GRUB menu, or log in and run <code>hx-deploy install</code>.</p>
+      <p><code>HydrivaX-v2.0-Server-amd64.iso</code> is install-first media. Pick <strong>Install HydrivaX OS v2.0 to Disk</strong> from the GRUB menu, or log in as root and run <code>hx install</code>.</p>
     </div>
     <div class="steps">
       <div class="step">
@@ -49,7 +49,7 @@ Get-FileHash HydrivaX-v2.0-Server-amd64.iso -Algorithm SHA256
 
 <span class="prompt"># Linux / macOS</span>
 sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
-          <p>Expected SHA256: <code>1f563cecb658a752fe7908fd65d5138854db1fb127ed40c5203d830638e890cb</code></p>
+          <p>Expected SHA256: <code>36eb69ac8f5ffb78323abe7c0732ac584228d439ade3c46351ed6adc10127ecb</code></p>
         </div>
       </div>
       <div class="step">
@@ -65,8 +65,8 @@ sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
       <div class="step">
         <div class="step-num">3</div>
         <div>
-          <h3>Log in to the live system</h3>
-          <div class="code-block"><span class="prompt">user</span> live
+          <h3>Log in to HydrivaX</h3>
+          <div class="code-block"><span class="prompt">user</span> root
 <span class="prompt">pass</span> hydrivax</div>
         </div>
       </div>
@@ -74,7 +74,7 @@ sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
         <div class="step-num">4</div>
         <div>
           <h3>Install permanently to disk</h3>
-          <p>The installer wipes the selected disk, creates a universal GPT layout with BIOS boot, EFI, and ext4 root partitions, clones the live system with <code>rsync -aAXv</code>, writes UUID-based <code>/etc/fstab</code>, and installs GRUB for BIOS and UEFI.</p>
+          <p>The installer wipes the selected disk, creates a universal GPT layout with BIOS boot, EFI, and ext4 root partitions, clones the HydrivaX runtime with <code>rsync -aAXv</code>, writes UUID-based <code>/etc/fstab</code>, and installs GRUB for BIOS and UEFI.</p>
           <div class="code-block"><span class="prompt">$</span> hx install
 
 <span class="prompt"># direct commands also work</span>
@@ -99,7 +99,7 @@ sudo hx-install</div>
   <div class="container">
     <div class="section-header">
       <h2>Desktop ISO: HydrivaX GUI</h2>
-      <p><code>HydrivaX-v2.0-Desktop-amd64.iso</code> includes HydrivaX Desktop Core. Use <strong>Install HydrivaX OS v2.0 to Disk</strong> in the GRUB menu for a headless install, or boot <strong>VGA Text</strong> to explore the live desktop.</p>
+      <p><code>HydrivaX-v2.0-Desktop-amd64.iso</code> includes HydrivaX Desktop Core. Use <strong>Install HydrivaX OS v2.0 to Disk</strong> in the GRUB menu for a headless install, or use the try mode to explore the HydrivaX desktop.</p>
     </div>
     <div class="steps">
       <div class="step">
@@ -111,7 +111,7 @@ Get-FileHash HydrivaX-v2.0-Desktop-amd64.iso -Algorithm SHA256
 
 <span class="prompt"># Linux / macOS</span>
 sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
-          <p>Expected SHA256: <code>6a977b614aeb135df0026cba692b1bbfd30f9417db605000e1276b6cdbccd2c6</code></p>
+          <p>Expected SHA256: <code>c15b96052e5dede0879c6373b6cfffd25f754ffceceba466960b73b8d1635c56</code></p>
         </div>
       </div>
       <div class="step">
@@ -125,7 +125,7 @@ sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
         <div class="step-num">3</div>
         <div>
           <h3>Or boot to HydrivaX Desktop</h3>
-          <p>Choose <strong>HydrivaX OS v2.0 - VGA Text</strong> to autologin to the live desktop. A terminal installer opens automatically.</p>
+          <p>Choose <strong>Try HydrivaX OS v2.0 without installing - VGA Text</strong> to open the secondary desktop/rescue mode. A terminal installer opens automatically there too.</p>
         </div>
       </div>
       <div class="step">
@@ -140,7 +140,7 @@ sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
         <div class="step-num">5</div>
         <div>
           <h3>Explore the GUI</h3>
-          <p>The live desktop includes a HydrivaX wallpaper, custom dock icons, HydrivaX apps, terminal fastfetch output, browser, settings, and file manager.</p>
+          <p>The HydrivaX desktop includes a HydrivaX wallpaper, custom dock icons, HydrivaX apps, terminal fastfetch output, browser, settings, and file manager.</p>
         </div>
       </div>
     </div>
