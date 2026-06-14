@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/images/logo-colored.svg" alt="HydrivaX" width="200">
+  <img src="logo.png" alt="HydrivaX" width="200">
 </p>
 
 <h3 align="center">HydrivaX</h3>
