@@ -16,7 +16,7 @@
 <nav class="site-nav">
   <div class="container nav-inner">
     <a href="index.html" class="nav-brand">
-      <img src="assets/images/logo-transparent.svg" alt="HydrivaX" width="36" height="36">
+      <img src="assets/images/favicon.svg" alt="HydrivaX" width="36" height="36">
       HydrivaX
     </a>
     <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
@@ -41,8 +41,14 @@
         <a href="install.html" class="btn btn-ghost">Install Guide</a>
       </div>
     </div>
-    <div class="hero-visual cli-showcase">
-      <img src="assets/images/HydrivaX_CLI.png" alt="HydrivaX CLI showing the real MOTD and hx-info output" width="1024" height="379">
+    <div class="hero-visual cli-showcase terminal-frame">
+      <div class="terminal-titlebar">
+        <span></span><span></span><span></span>
+        <strong>root@hydrivax:~</strong>
+      </div>
+      <div class="terminal-screen">
+        <img src="assets/images/HydrivaX_CLI.png" alt="HydrivaX CLI showing the real MOTD and hx-info output" width="1024" height="379">
+      </div>
     </div>
   </div>
 </section>

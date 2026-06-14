@@ -4,9 +4,9 @@ Managed visual assets for the GitHub Pages site.
 
 | File | Source | Used on |
 |------|--------|---------|
-| `logo-transparent.svg` | `logos/transparent-logo.svg` | Nav, hero (dark backgrounds) |
+| `logo-transparent.svg` | `logos/transparent-logo.svg` | Dark cards and large logo placements |
 | `logo-colored.svg` | `logos/colored-logo.svg` | Light sections, Open Graph fallback |
-| `favicon.svg` | Derived from brand palette | Browser tab icon |
+| `favicon.svg` | Derived from brand palette | Browser tab icon and navbar mark |
 | `og-image.svg` | Custom social card | `og:image` meta tag |
 | `HydrivaX_CLI.png` | Real HydrivaX CLI capture showing MOTD and `hx-info` output | Home hero, CLI showcase |
 
