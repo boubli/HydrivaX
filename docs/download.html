@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Download — HydrivaX</title>
-  <meta name="description" content="Download HydrivaX OS ISO or the Proxmox LXC template from GitHub Releases.">
+  <meta name="description" content="Download HydrivaX OS v2.0 Server, HydrivaX OS v2.0 Desktop, or the Proxmox LXC template.">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -28,8 +28,8 @@
 
 <section class="page-hero">
   <div class="container">
-    <h1>Download</h1>
-    <p>Choose your edition — bootable server ISO or Proxmox LXC template.</p>
+    <h1>Download HydrivaX</h1>
+    <p>Choose the right image for your machine: Server ISO, Desktop ISO, or Proxmox LXC template.</p>
   </div>
 </section>
 
@@ -37,23 +37,35 @@
   <div class="container">
     <div class="download-grid">
       <div class="download-card download-card--featured">
-        <span class="download-badge">Latest</span>
+        <span class="download-badge">Recommended</span>
         <img src="assets/images/logo-transparent.svg" alt="HydrivaX" width="80" height="80" style="margin:0 auto 1.5rem;">
-        <h2>HydrivaX OS v1.2</h2>
-        <p>Bootable headless server ISO for VirtualBox, Proxmox VMs, mini PCs, and old hardware. Debian 12 Live, HydrivaX branding, SSH-ready.</p>
-        <a href="https://github.com/boubli/HydrivaX/releases" class="btn btn-primary" target="_blank" rel="noopener">Download ISO</a>
+        <h2>HydrivaX OS v2.0 Server</h2>
+        <p>Installable live server ISO for Proxmox VMs, VirtualBox, VMware, mini PCs, old desktops, and bare-metal machines.</p>
+        <a href="https://github.com/boubli/HydrivaX/releases" class="btn btn-primary" target="_blank" rel="noopener">Download Server ISO</a>
         <div class="download-meta">
-          <span>File: <strong>HydrivaX-v1.2-Server-amd64.iso</strong></span>
-          <span>Size: <strong>~565 MB</strong></span>
+          <span>File: <strong>HydrivaX-v2.0-Server-amd64.iso</strong></span>
+          <span>Size: <strong>574 MB</strong></span>
         </div>
-        <p class="download-note">Login: <code>live</code> / <code>hydrivax</code></p>
+        <p class="download-note">Boot live, then run <code>sudo hx-deploy install</code>.</p>
+      </div>
+
+      <div class="download-card">
+        <img src="assets/images/logo-transparent.svg" alt="HydrivaX" width="80" height="80" style="margin:0 auto 1.5rem;">
+        <h2>HydrivaX OS v2.0 Desktop</h2>
+        <p>Graphical HydrivaX Desktop Core ISO with custom wallpaper, HydrivaX dock, branded apps, and first-boot installer launcher.</p>
+        <a href="https://github.com/boubli/HydrivaX/releases" class="btn btn-primary" target="_blank" rel="noopener">Download Desktop ISO</a>
+        <div class="download-meta">
+          <span>File: <strong>HydrivaX-v2.0-Desktop-amd64.iso</strong></span>
+          <span>Size: <strong>1020 MB</strong></span>
+        </div>
+        <p class="download-note">Boot desktop; installer opens automatically.</p>
       </div>
 
       <div class="download-card">
         <img src="assets/images/logo-transparent.svg" alt="HydrivaX" width="80" height="80" style="margin:0 auto 1.5rem;">
         <h2>HydrivaX v2.0 LXC</h2>
-        <p>Proxmox-ready container template. Debian 12 base, 99 MB compressed, 99 deployable modules included.</p>
-        <a href="https://github.com/boubli/HydrivaX/releases" class="btn btn-primary" target="_blank" rel="noopener">Download Template</a>
+        <p>Proxmox container template. Lightweight CLI-only rootfs for containers, not for bare-metal disk installation.</p>
+        <a href="https://github.com/boubli/HydrivaX/releases" class="btn btn-primary" target="_blank" rel="noopener">Download LXC Template</a>
         <div class="download-meta">
           <span>File: <strong>HydrivaX-v2.0-LXC.tar.zst</strong></span>
           <span>Format: <strong>.tar.zst</strong></span>
@@ -66,12 +78,12 @@
 <section class="section section-light">
   <div class="container">
     <div class="section-header">
-      <h2>Release checksums</h2>
-      <p>Use these hashes to verify local ISO files before booting.</p>
+      <h2>v2.0 Checksums</h2>
+      <p>Verify the ISO before booting or uploading it to Proxmox.</p>
     </div>
-    <table class="specs-table" style="max-width:760px;margin:0 auto;">
-      <tr><td>v1.2 ISO</td><td><code style="font-size:0.75rem;word-break:break-all;">70f947cc55f42d8fbbd7bdb6cb137d908afe45bab776a1e7c5415c19a2a2f6d2</code></td></tr>
-      <tr><td>v1.0 ISO</td><td><code style="font-size:0.75rem;word-break:break-all;">fb4ee1be0392645ac8c639d1eaffdb87f6d453c6d4947eed445b97633dea273f</code></td></tr>
+    <table class="specs-table" style="max-width:900px;margin:0 auto;">
+      <tr><td>Server ISO</td><td><code style="font-size:0.75rem;word-break:break-all;">73f68ef95bc8175b4b53373b2bb1e7d4ce9da7d97c31b9d11999211b47d89bf5</code></td></tr>
+      <tr><td>Desktop ISO</td><td><code style="font-size:0.75rem;word-break:break-all;">ec2a7466e7adcf5d99f39470a8026597662adb26bbfd63593789d1a184594fed</code></td></tr>
     </table>
   </div>
 </section>
@@ -79,12 +91,13 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2>After downloading</h2>
-      <p>Follow the install guide for your edition.</p>
+      <h2>Next steps</h2>
+      <p>Use the installation guide for VM, bare-metal, desktop, and LXC workflows.</p>
     </div>
     <div style="text-align:center;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-      <a href="install.html#iso" class="btn btn-ghost" style="display:inline-flex;">Boot from ISO →</a>
-      <a href="install.html#lxc" class="btn btn-ghost" style="display:inline-flex;">LXC Template →</a>
+      <a href="install.html#server-iso" class="btn btn-ghost" style="display:inline-flex;">Install Server ISO →</a>
+      <a href="install.html#desktop-iso" class="btn btn-ghost" style="display:inline-flex;">Install Desktop ISO →</a>
+      <a href="install.html#lxc" class="btn btn-ghost" style="display:inline-flex;">Use LXC Template →</a>
     </div>
   </div>
 </section>

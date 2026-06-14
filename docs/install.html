@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Install — HydrivaX</title>
-  <meta name="description" content="Install HydrivaX from ISO or Proxmox LXC template. Boot on VMs, mini PCs, or deploy containers.">
+  <meta name="description" content="Install HydrivaX OS v2.0 Server, HydrivaX OS v2.0 Desktop, or deploy the Proxmox LXC template.">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -28,127 +28,133 @@
 
 <section class="page-hero">
   <div class="container">
-    <h1>Install</h1>
-    <p>Boot HydrivaX OS from ISO or deploy the LXC template on Proxmox.</p>
+    <h1>Install HydrivaX OS v2.0</h1>
+    <p>Server ISO for CLI infrastructure, Desktop ISO for a graphical HydrivaX environment, and LXC for Proxmox containers.</p>
   </div>
 </section>
 
-<section class="section" id="iso">
+<section class="section" id="server-iso">
   <div class="container">
     <div class="section-header">
-      <h2>Boot from ISO</h2>
-      <p>HydrivaX OS v1.2 — VirtualBox, Proxmox VMs, VMware, mini PCs, and physical hardware.</p>
+      <h2>Server ISO: VM or Bare Metal</h2>
+      <p><code>HydrivaX-v2.0-Server-amd64.iso</code> boots live first, then installs permanently with <code>hx-deploy install</code>.</p>
     </div>
-
-    <!-- Installation Options Overview -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 0 auto 3rem; max-width: 960px;">
-      <div class="feature-card" style="border: 1px solid var(--border-glow); background: rgba(1, 44, 87, 0.4); text-align: left; padding: 2rem; border-radius: 8px;">
-        <h3 style="color: var(--cyan-bright); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">💻 Option A: Virtual Machines</h3>
-        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem;">Run HydrivaX OS inside a hypervisor (Proxmox VE VM, VirtualBox, or VMware). Perfect for testing, development, and clean sandboxed hosting environments.</p>
-        <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.8;">
-          <li>Upload ISO to Proxmox or VM datastore</li>
-          <li>Create VM with 1 CPU, 1-2 GB RAM, SATA/VirtIO</li>
-          <li>Attach ISO as virtual optical drive</li>
-          <li>Boot and access via noVNC / VGA Console</li>
-        </ul>
-      </div>
-      <div class="feature-card" style="border: 1px solid var(--border-glow); background: rgba(1, 44, 87, 0.4); text-align: left; padding: 2rem; border-radius: 8px;">
-        <h3 style="color: var(--cyan-bright); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">🔌 Option B: Physical Hardware</h3>
-        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem;">Install HydrivaX OS directly on bare metal (Mini PCs, Intel NUCs, old desktops, or dedicated rack servers) to utilize 100% of physical hardware power.</p>
-        <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.8;">
-          <li>Flash ISO to USB using <strong>Rufus</strong>, <strong>BalenaEtcher</strong>, or <strong>Ventoy</strong></li>
-          <li>Insert USB into the target machine</li>
-          <li>Access BIOS/Boot Menu (usually F12, F11, or Esc)</li>
-          <li>Boot from USB (UEFI & Legacy BIOS are supported)</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Detailed Step-by-Step -->
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div>
-          <h3>Download the ISO & Verify</h3>
-          <p>Grab <code>HydrivaX-v1.2-Server-amd64.iso</code> from the <a href="download.html">Download</a> page. To guarantee a clean, uncorrupted image, verify the SHA256 checksum in your terminal:</p>
-          <div class="code-block"><span class="prompt"># Windows (PowerShell)</span>
-Get-FileHash HydrivaX-v1.2-Server-amd64.iso -Algorithm SHA256
+          <h3>Download and verify</h3>
+          <div class="code-block"><span class="prompt"># Windows</span>
+Get-FileHash HydrivaX-v2.0-Server-amd64.iso -Algorithm SHA256
 
-<span class="prompt"># Linux / macOS (Terminal)</span>
-sha256sum HydrivaX-v1.2-Server-amd64.iso</div>
-          <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">Compare the output hash with the checksums listed on the downloads page.</p>
+<span class="prompt"># Linux / macOS</span>
+sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
+          <p>Expected SHA256: <code>73f68ef95bc8175b4b53373b2bb1e7d4ce9da7d97c31b9d11999211b47d89bf5</code></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div>
-          <h3>Prepare Boot Medium</h3>
-          <p>Choose the method below that matches your deployment target:</p>
-          <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted); line-height: 1.6;">
-            <li><strong>For Proxmox VE (VM):</strong> Upload the ISO via the Proxmox Web UI (Local storage → ISO Images → Upload) or copy it directly using SCP:
-              <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/</div>
-            </li>
-            <li style="margin-top: 0.75rem;"><strong>For VirtualBox & VMware:</strong> Save the ISO in a permanent folder on your host machine.</li>
-            <li style="margin-top: 0.75rem;"><strong>For Physical Hardware (USB Flashing):</strong> Flash the ISO to a USB flash drive (8GB+ recommended). 
-              <br><em>Tools:</em> Use **Rufus** (Windows - select ISO mode, re-flash in DD mode if boot fails), **BalenaEtcher** (Cross-platform), or **Ventoy** (simply drag and drop the ISO onto the Ventoy drive).
-            </li>
-          </ul>
+          <h3>Boot the ISO</h3>
+          <p>Use Proxmox VM, VirtualBox, VMware, or a flashed USB drive for physical machines. For Proxmox, upload the ISO:</p>
+          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v2.0-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/</div>
+          <p>Recommended VM settings: BIOS/SeaBIOS, 1-2 vCPU, 1-2 GB RAM, 10-20 GB disk, SATA/SCSI/VirtIO disk, NAT or bridged network.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div>
-          <h3>Platform Configuration</h3>
-          <p>Set up your environment settings according to the platform you are deploying on:</p>
-          
-          <div style="margin-top: 1rem; padding-left: 0.75rem; border-left: 2px solid var(--blue-accent);">
-            <strong style="color: var(--cyan-bright);">Proxmox VE (KVM VM):</strong>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">Create a VM. Allocate 1–2 vCPUs (Host type recommended), 1–2 GB RAM, and 10–20 GB storage. Attach the ISO to the CD/DVD drive.
-            <br><em>Important:</em> To avoid black screen issues in noVNC, add a <strong>Serial terminal 0</strong> in the hardware settings and set display to <code>Serial terminal 0</code>.</p>
-          </div>
-
-          <div style="margin-top: 1rem; padding-left: 0.75rem; border-left: 2px solid var(--blue-accent);">
-            <strong style="color: var(--cyan-bright);">VirtualBox:</strong>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">Create a new VM, select type <code>Linux</code> and version <code>Debian (64-bit)</code>. Allocate 1 CPU and 1–2 GB RAM. Mount the ISO under Storage settings.
-            <br><em>Tip:</em> Ensure <strong>Enable EFI</strong> is unchecked in System settings, and set the Graphics Controller to <code>VBoxSVGA</code> or <code>VMSVGA</code> under Display.</p>
-          </div>
-
-          <div style="margin-top: 1rem; padding-left: 0.75rem; border-left: 2px solid var(--blue-accent);">
-            <strong style="color: var(--cyan-bright);">VMware Workstation / Player:</strong>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">Create a VM with typical configuration, select installer disc image (ISO), and point to the HydrivaX ISO. Choose Guest OS <code>Linux</code> and version <code>Debian 12 64-bit</code>. Allocate 1 CPU, 1-2 GB RAM, and set Network Connection to <code>NAT</code> or <code>Bridged</code>.</p>
-          </div>
-
-          <div style="margin-top: 1rem; padding-left: 0.75rem; border-left: 2px solid var(--blue-accent);">
-            <strong style="color: var(--cyan-bright);">Physical Hardware (Bare Metal / Mini PC):</strong>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">Insert the flashed USB drive. Power on the machine and immediately press the Boot Menu hotkey (F12, F11, F8, F9, or Esc depending on manufacturer). Select the USB boot option.
-            <br><em>Tip:</em> Enter BIOS (Del or F2) and **disable Secure Boot**. You may also need to enable Legacy Support/CSM if using older legacy boot modes.</p>
-          </div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div>
-          <h3>Boot & Log in</h3>
-          <p>Start the VM or physical machine. At the GRUB boot menu, choose your console option:</p>
-          <ul style="padding-left: 1.25rem; font-size: 0.9rem; margin: 0.5rem 0; color: var(--text-muted); line-height: 1.6;">
-            <li><strong>VGA Text:</strong> Standard console output (best for VirtualBox, VMware, and physical monitors).</li>
-            <li><strong>Serial Console:</strong> Redirects boot output to serial ttyS0 (best for headless servers and Proxmox noVNC serial console).</li>
-            <li><strong>Fail-safe:</strong> Safe mode using basic drivers for older or difficult hardware.</li>
-          </ul>
-          <p>Once loaded, log in with the live system credentials:</p>
+          <h3>Log in to the live system</h3>
           <div class="code-block"><span class="prompt">user</span> live
 <span class="prompt">pass</span> hydrivax</div>
         </div>
       </div>
       <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Install permanently to disk</h3>
+          <p>The installer wipes the selected disk, creates an MBR/ext4 root partition, clones the live system with <code>rsync -aAXv</code>, writes UUID-based <code>/etc/fstab</code>, and installs GRUB.</p>
+          <div class="code-block"><span class="prompt">$</span> sudo hx-deploy install
+
+<span class="prompt"># direct command also works</span>
+sudo hx-install</div>
+          <p>Examples of valid target disks: <code>/dev/sda</code>, <code>/dev/vda</code>, <code>/dev/nvme0n1</code>, <code>/dev/mmcblk0</code>.</p>
+        </div>
+      </div>
+      <div class="step">
         <div class="step-num">5</div>
         <div>
-          <h3>First commands</h3>
-          <p>Your live server is now up! Run information and status commands, or list the deployable modules:</p>
-          <div class="code-block"><span class="prompt">$</span> hx-info
-<span class="prompt">$</span> hx-status
-<span class="prompt">$</span> hx-deploy list</div>
+          <h3>Reboot into installed OS</h3>
+          <p>When the installer finishes, remove the ISO/USB media and reboot. The machine will boot from the installed disk.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light" id="desktop-iso">
+  <div class="container">
+    <div class="section-header">
+      <h2>Desktop ISO: HydrivaX GUI</h2>
+      <p><code>HydrivaX-v2.0-Desktop-amd64.iso</code> includes HydrivaX Desktop Core and opens the installer automatically on first desktop boot.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Download and verify</h3>
+          <div class="code-block"><span class="prompt"># Windows</span>
+Get-FileHash HydrivaX-v2.0-Desktop-amd64.iso -Algorithm SHA256
+
+<span class="prompt"># Linux / macOS</span>
+sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
+          <p>Expected SHA256: <code>ec2a7466e7adcf5d99f39470a8026597662adb26bbfd63593789d1a184594fed</code></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Boot to HydrivaX Desktop</h3>
+          <p>The desktop ISO autologins to the live desktop. You do not need to log in first. A terminal installer opens automatically.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Install from the desktop</h3>
+          <p>Use the automatic installer window, or click <strong>Install HydrivaX OS</strong> on the desktop/dock. It runs the same production installer:</p>
+          <div class="code-block"><span class="prompt">$</span> sudo hx-install</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Explore the GUI</h3>
+          <p>The live desktop includes a HydrivaX wallpaper, custom dock icons, HydrivaX apps, terminal fastfetch output, browser, settings, and file manager.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="commands">
+  <div class="container">
+    <div class="section-header">
+      <h2>New v2.0 Commands</h2>
+      <p>These commands are available inside the ISO images.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3><code>hx-deploy install</code></h3>
+        <p>Branded entry point for installing HydrivaX OS permanently to a VM or physical disk.</p>
+      </div>
+      <div class="feature-card">
+        <h3><code>hx-install</code></h3>
+        <p>Native disk installer. Handles SATA/SCSI/VirtIO, NVMe, eMMC, MBR partitioning, ext4 formatting, rsync clone, UUID fstab, and GRUB.</p>
+      </div>
+      <div class="feature-card">
+        <h3><code>hydrivax-install</code></h3>
+        <p>Compatibility alias for users who remember the older installer command.</p>
       </div>
     </div>
   </div>
@@ -157,60 +163,26 @@ sha256sum HydrivaX-v1.2-Server-amd64.iso</div>
 <section class="section section-light" id="lxc">
   <div class="container">
     <div class="section-header">
-      <h2>Proxmox LXC template</h2>
-      <p>Deploy HydrivaX as a lightweight container on Proxmox VE.</p>
+      <h2>Proxmox LXC Template</h2>
+      <p>LXC remains a lightweight Proxmox container template. It is not for bare-metal disk installation and does not include the GUI installer workflow.</p>
     </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div>
-          <h3>Download the template</h3>
-          <p>Grab <code>HydrivaX-v2.0-LXC.tar.zst</code> from the <a href="download.html">Releases</a> page.</p>
+          <h3>Upload the template</h3>
+          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v2.0-LXC.tar.zst root@PROXMOX_IP:/var/lib/vz/template/cache/</div>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div>
-          <h3>Upload to Proxmox</h3>
-          <p>Copy the archive to your Proxmox template cache directory.</p>
-          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v2.0-LXC.tar.zst root@PROXMOX_IP:/var/lib/vz/template/cache/</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div>
           <h3>Create a container</h3>
-          <p>Open the Proxmox web UI, go to your node → CT Templates, and create a new LXC container from the HydrivaX template. Configure CPU, RAM, and storage as needed.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div>
-          <h3>First commands</h3>
-          <p>SSH into your new container and explore the CLI toolkit.</p>
+          <p>Use the Proxmox UI to create a CT from the template. Then SSH in and use the CLI tools.</p>
           <div class="code-block"><span class="prompt">$</span> hx-info
-<span class="prompt">$</span> hx-deploy list
 <span class="prompt">$</span> hx-status
-<span class="prompt">$</span> hx-deploy docker</div>
+<span class="prompt">$</span> hx-deploy list</div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2>What to expect</h2>
-      <p>On first login you'll see the HydrivaX MOTD banner. The system is intentionally minimal — install only what you need.</p>
-    </div>
-    <div class="cli-showcase terminal-frame" style="max-width:720px;margin:0 auto;">
-      <div class="terminal-titlebar">
-        <span></span><span></span><span></span>
-        <strong>root@hydrivax:~</strong>
-      </div>
-      <div class="terminal-screen">
-        <img src="assets/images/HydrivaX_CLI.png" alt="HydrivaX CLI showing the real MOTD and hx-info output">
       </div>
     </div>
   </div>

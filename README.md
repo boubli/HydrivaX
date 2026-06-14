@@ -3,23 +3,24 @@
 </p>
 
 <h3 align="center">HydrivaX</h3>
-<p align="center">Minimal headless Linux for self-hosted infrastructure.<br>Proxmox LXC template · bootable server ISO</p>
+<p align="center">Minimal Linux for self-hosted infrastructure.<br>Installable Server ISO · HydrivaX Desktop ISO · Proxmox LXC template</p>
 <p align="center"><a href="https://boubli.github.io/HydrivaX/">Website</a> · <a href="https://github.com/boubli/HydrivaX/releases">Download</a></p>
 
 ---
 
 ## What is this
 
-HydrivaX is a stripped-down Debian 12 base with a modular CLI toolkit for deploying services. No GUI, no desktop, no bloat — just a clean starting point for running your own stuff.
+HydrivaX is a stripped-down Debian 12 base with a modular CLI toolkit for deploying services. It now ships as installable v2.0 OS images for VMs/bare metal and as a lightweight Proxmox LXC template.
 
 Two editions are supported:
 
 | Edition | Format | Size | Use case |
 |---------|--------|------|----------|
-| **HydrivaX OS** | bootable `.iso` | ~565 MB | Old PCs, mini PCs, VirtualBox, Proxmox VMs |
+| **HydrivaX OS Server** | bootable `.iso` | 574 MB | Servers, old PCs, mini PCs, VirtualBox, Proxmox VMs |
+| **HydrivaX OS Desktop** | bootable `.iso` | 1020 MB | HydrivaX graphical desktop for VMs and physical machines |
 | **LXC Template** | `.tar.zst` | 99 MB | Proxmox containers |
 
-The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The OS ISO is a text-only Debian Live server image with HydrivaX branding and CLI tools pre-installed.
+The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The Server ISO is CLI-first and installable with `hx-deploy install`. The Desktop ISO adds HydrivaX Desktop Core and launches the installer automatically on first desktop boot.
 
 ## CLI
 
@@ -85,19 +86,22 @@ hx-deploy verify docker  # check if it's working
 | `hx-status` | System dashboard (CPU, RAM, disk, services) |
 | `hx-info` | OS version and system info |
 | `hx-update` | Update system packages |
+| `hx-deploy install` | Install HydrivaX OS permanently to disk |
+| `hx-install` | Native disk installer used by Server/Desktop ISOs |
+| `hydrivax-install` | Compatibility alias for `hx-install` |
 
 ## Install
 
 For a detailed, step-by-step guide with screenshots for Proxmox (LXC/VM), VirtualBox, VMware, and physical hardware, check out the [Full Installation Guide](https://boubli.github.io/HydrivaX/install.html).
 
-### HydrivaX OS ISO
+### HydrivaX OS v2.0 Server ISO
 
-Download `HydrivaX-v1.2-Server-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
+Download `HydrivaX-v2.0-Server-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
 
 #### Option A: Virtual Machines (Proxmox, VirtualBox, VMware)
 1. Upload the ISO to your hypervisor's storage. For Proxmox:
    ```bash
-   scp HydrivaX-v1.2-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/
+   scp HydrivaX-v2.0-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/
    ```
 2. Create a new VM (1-2 vCPUs, 1-2 GB RAM, SATA/VirtIO).
 3. Attach the ISO to the CD/DVD drive and boot.
@@ -112,6 +116,24 @@ Live credentials:
 ```text
 user: live
 pass: hydrivax
+```
+
+Install permanently:
+
+```bash
+sudo hx-deploy install
+# or
+sudo hx-install
+```
+
+### HydrivaX OS v2.0 Desktop ISO
+
+Download `HydrivaX-v2.0-Desktop-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
+
+Boot the ISO and the HydrivaX Desktop Core live session starts automatically. The installer opens on first desktop boot, or you can launch it from the dock/desktop shortcut:
+
+```bash
+sudo hx-install
 ```
 
 Recommended boot entries:
@@ -275,14 +297,14 @@ hx-deploy list
 
 ## Specs
 
-| | HydrivaX OS ISO | LXC Template |
-|---|---|---|
-| Base | Debian 12 Live (Bookworm) | Debian 12 (Bookworm) |
-| Size | ~565 MB | 99 MB compressed |
-| Format | Bootable amd64 ISO | Proxmox LXC `.tar.zst` |
-| Target | VMs, mini PCs, old hardware | Proxmox containers |
-| Shell | bash | bash |
-| Edition | Headless CLI, text-only live | Headless CLI |
+| | Server ISO | Desktop ISO | LXC Template |
+|---|---|---|---|
+| Base | Debian 12 Live | Debian 12 Live | Debian 12 |
+| Size | 574 MB | 1020 MB | 99 MB compressed |
+| Format | Bootable amd64 ISO | Bootable amd64 ISO | Proxmox LXC `.tar.zst` |
+| Target | VMs, mini PCs, old hardware | GUI desktops, laptops, VMs | Proxmox containers |
+| Installer | `hx-deploy install` / `hx-install` | automatic first-boot installer | not included |
+| Edition | Headless CLI server | HydrivaX Desktop Core | Headless CLI container |
 
 ## License
 

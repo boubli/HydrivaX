@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HydrivaX — Minimal Headless Linux for Self-Hosted Infrastructure</title>
-  <meta name="description" content="HydrivaX is a stripped-down Debian 12 base for self-hosted infrastructure. Proxmox LXC template and bootable server ISO.">
+  <title>HydrivaX — Lightweight Server, Desktop, and LXC Infrastructure OS</title>
+  <meta name="description" content="HydrivaX OS v2.0 ships as installable Server and Desktop ISOs plus a Proxmox LXC template.">
   <meta property="og:title" content="HydrivaX">
-  <meta property="og:description" content="Minimal headless Linux for self-hosted infrastructure. LXC template and bootable OS ISO.">
+  <meta property="og:description" content="Installable HydrivaX OS v2.0 Server/Desktop ISOs and lightweight Proxmox LXC template.">
   <meta property="og:image" content="assets/images/og-image.svg">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
@@ -32,9 +32,9 @@
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-content">
-      <span class="hero-badge">LXC Template · Bootable ISO</span>
-      <h1>Minimal headless Linux for <span>self-hosted</span> infrastructure</h1>
-      <p class="hero-tagline">A stripped-down Debian 12 base with a modular CLI toolkit. Deploy the 99 MB Proxmox template or boot the HydrivaX OS ISO on VMs and bare metal.</p>
+      <span class="hero-badge">Server ISO · Desktop ISO · LXC Template</span>
+      <h1>HydrivaX OS v2.0 for <span>machines and containers</span></h1>
+      <p class="hero-tagline">Install the Server ISO on VMs and bare metal, boot the custom HydrivaX Desktop ISO, or deploy the lightweight Proxmox LXC template.</p>
       <div class="hero-actions">
         <a href="download.html" class="btn btn-primary">Download Release</a>
         <a href="install.html" class="btn btn-ghost">Install Guide</a>
@@ -48,7 +48,7 @@
       <div class="terminal-screen">
         <div class="terminal-content" aria-label="HydrivaX CLI preview">
           <div class="terminal-ascii">HYDRIVAX</div>
-          <div class="terminal-subtitle">Headless CLI Edition | OS v1.2</div>
+          <div class="terminal-subtitle">HydrivaX OS v2.0 | Server + Desktop</div>
 
           <div class="terminal-command"><span>root@hydrivax:~#</span> hx-info</div>
           <div class="terminal-output">
@@ -56,7 +56,8 @@
             <div><span>Edition</span> Headless CLI</div>
             <div><span>Base</span> Debian 12 Bookworm</div>
             <div><span>Template</span> Proxmox LXC · 99 MB</div>
-            <div><span>ISO</span> Bootable server · ~565 MB</div>
+            <div><span>Server ISO</span> Installable · 574 MB</div>
+            <div><span>Desktop ISO</span> HydrivaX Desktop Core · 1020 MB</div>
           </div>
 
           <div class="terminal-command"><span>root@hydrivax:~#</span> hx-deploy list</div>
@@ -121,13 +122,13 @@
       </div>
       <div class="feature-card">
         <div class="feature-icon">💿</div>
-        <h3>Bootable OS ISO</h3>
-        <p>HydrivaX OS v1.2 ships as a Debian Live server image for VirtualBox, Proxmox VMs, mini PCs, and old hardware with text and serial boot entries.</p>
+        <h3>Installable OS ISOs</h3>
+        <p>HydrivaX OS v2.0 ships as Server and Desktop ISOs. Boot live, install permanently with <code>hx-deploy install</code>, then reboot from disk.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🖥️</div>
-        <h3>Headless CLI first</h3>
-        <p>Built around <code>hx-deploy</code>, <code>hx-status</code>, and <code>hx-info</code>. A terminal-native experience for infrastructure operators.</p>
+        <h3>HydrivaX Desktop Core</h3>
+        <p>The Desktop ISO adds a branded graphical interface, custom wallpaper, dock, HydrivaX apps, and first-boot installer launcher.</p>
       </div>
     </div>
   </div>
@@ -158,7 +159,7 @@
     <div class="features-grid">
       <div class="feature-card">
         <h3><code>hx-deploy</code></h3>
-        <p>Install, remove, verify, list, and search across 99 modules. The core deployment engine.</p>
+        <p>Install modules and run <code>hx-deploy install</code> to deploy HydrivaX permanently to disk.</p>
       </div>
       <div class="feature-card">
         <h3><code>hx-status</code></h3>

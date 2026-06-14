@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Specs — HydrivaX</title>
-  <meta name="description" content="HydrivaX technical specifications for the LXC template and bootable OS ISO.">
+  <meta name="description" content="HydrivaX v2.0 technical specifications for Server ISO, Desktop ISO, and Proxmox LXC template.">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -29,27 +29,27 @@
 <section class="page-hero">
   <div class="container">
     <h1>Specifications</h1>
-    <p>Technical details for both HydrivaX editions.</p>
+    <p>HydrivaX v2.0 ships in three clean targets: Server ISO, Desktop ISO, and Proxmox LXC.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2>HydrivaX OS v1.2</h2>
-      <p>Bootable headless server ISO — Debian Live, amd64.</p>
+      <h2>HydrivaX OS v2.0 Server</h2>
+      <p>Installable live server ISO for VMs and bare metal.</p>
     </div>
     <table class="specs-table">
       <tr><td>Base OS</td><td>Debian 12 (Bookworm) Live</td></tr>
-      <tr><td>ISO size</td><td>~565 MB</td></tr>
-      <tr><td>Format</td><td>Bootable amd64 ISO (BIOS + EFI)</td></tr>
-      <tr><td>Architecture</td><td>x86_64 (amd64)</td></tr>
-      <tr><td>Edition</td><td>Headless CLI (text-only, no desktop)</td></tr>
+      <tr><td>ISO size</td><td>574 MB</td></tr>
+      <tr><td>Format</td><td>Bootable amd64 ISO</td></tr>
+      <tr><td>Edition</td><td>Headless CLI server</td></tr>
+      <tr><td>Install command</td><td><code>sudo hx-deploy install</code> or <code>sudo hx-install</code></td></tr>
+      <tr><td>Partition layout</td><td>MBR/msdos + single ext4 root partition</td></tr>
+      <tr><td>Bootloader</td><td>GRUB installed to target disk</td></tr>
       <tr><td>Live user</td><td><code>live</code> / <code>hydrivax</code></td></tr>
-      <tr><td>Boot entries</td><td>VGA Text, Serial Console, Fail-safe</td></tr>
-      <tr><td>Min RAM</td><td>512 MB (1 GB recommended)</td></tr>
-      <tr><td>Target</td><td>VirtualBox, Proxmox VE, mini PCs, old hardware</td></tr>
-      <tr><td>License</td><td>Non-Commercial</td></tr>
+      <tr><td>Target</td><td>Proxmox VM, VirtualBox, VMware, mini PCs, old desktops, bare metal</td></tr>
+      <tr><td>SHA256</td><td><code style="font-size:0.75rem;word-break:break-all;">73f68ef95bc8175b4b53373b2bb1e7d4ce9da7d97c31b9d11999211b47d89bf5</code></td></tr>
     </table>
   </div>
 </section>
@@ -57,20 +57,19 @@
 <section class="section section-light">
   <div class="container">
     <div class="section-header">
-      <h2>LXC Template v2.0</h2>
-      <p>Proxmox container template — stripped rootfs.</p>
+      <h2>HydrivaX OS v2.0 Desktop</h2>
+      <p>Graphical HydrivaX Desktop Core ISO with first-boot installer.</p>
     </div>
     <table class="specs-table">
-      <tr><td>Base OS</td><td>Debian 12 (Bookworm)</td></tr>
-      <tr><td>Template size</td><td>99 MB</td></tr>
-      <tr><td>Rootfs size</td><td>346 MB</td></tr>
-      <tr><td>Format</td><td>Proxmox LXC (.tar.zst)</td></tr>
-      <tr><td>Shell</td><td>bash</td></tr>
-      <tr><td>Edition</td><td>Headless CLI</td></tr>
-      <tr><td>Deploy modules</td><td>99</td></tr>
-      <tr><td>Pre-installed services</td><td>None</td></tr>
-      <tr><td>Target platform</td><td>Proxmox VE (LXC)</td></tr>
-      <tr><td>License</td><td>Non-Commercial</td></tr>
+      <tr><td>Base OS</td><td>Debian 12 (Bookworm) Live</td></tr>
+      <tr><td>ISO size</td><td>1020 MB</td></tr>
+      <tr><td>Desktop</td><td>XFCE + HydrivaX Desktop Core custom UI</td></tr>
+      <tr><td>Login</td><td>Live desktop autologin</td></tr>
+      <tr><td>Installer UX</td><td>Installer launches automatically on first desktop boot</td></tr>
+      <tr><td>Included UI</td><td>HydrivaX wallpaper, dock, branded app launchers, terminal fastfetch output</td></tr>
+      <tr><td>Install command</td><td><code>sudo hx-install</code></td></tr>
+      <tr><td>Target</td><td>VMs, laptops, mini PCs, desktop PCs, bare metal</td></tr>
+      <tr><td>SHA256</td><td><code style="font-size:0.75rem;word-break:break-all;">ec2a7466e7adcf5d99f39470a8026597662adb26bbfd63593789d1a184594fed</code></td></tr>
     </table>
   </div>
 </section>
@@ -78,23 +77,18 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2>What's stripped (LXC)</h2>
-      <p>The LXC template removes everything a container doesn't need.</p>
+      <h2>HydrivaX v2.0 LXC Template</h2>
+      <p>Proxmox container template, kept CLI-only and lightweight.</p>
     </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3>No kernel modules</h3>
-        <p>Kernel modules are not needed inside an LXC container and are removed to save space.</p>
-      </div>
-      <div class="feature-card">
-        <h3>No firmware or bootloader</h3>
-        <p>Firmware blobs and bootloader packages are purged from the rootfs.</p>
-      </div>
-      <div class="feature-card">
-        <h3>No locales bloat</h3>
-        <p>Unnecessary locale data is stripped. The system stays lean and fast to deploy.</p>
-      </div>
-    </div>
+    <table class="specs-table">
+      <tr><td>Base OS</td><td>Debian 12 (Bookworm)</td></tr>
+      <tr><td>Template size</td><td>99 MB</td></tr>
+      <tr><td>Rootfs size</td><td>346 MB</td></tr>
+      <tr><td>Format</td><td>Proxmox LXC <code>.tar.zst</code></td></tr>
+      <tr><td>Edition</td><td>Headless CLI container</td></tr>
+      <tr><td>Disk installer</td><td>Not included; LXC is container-only</td></tr>
+      <tr><td>Target platform</td><td>Proxmox VE containers</td></tr>
+    </table>
   </div>
 </section>
 
