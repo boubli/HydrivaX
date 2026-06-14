@@ -286,7 +286,7 @@ hx-deploy list
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Custom Non-Commercial License (Free for personal use, commercial use prohibited) — see [LICENSE](LICENSE).
 
 ## Author
 
