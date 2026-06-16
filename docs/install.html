@@ -44,11 +44,12 @@
         <div class="step-num">1</div>
         <div>
           <h3>Download and verify</h3>
-          <div class="code-block"><span class="prompt"># Windows</span>
-Get-FileHash HydrivaX-v2.0-Server-amd64.iso -Algorithm SHA256
-
-<span class="prompt"># Linux / macOS</span>
-sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
+          <div class="code-block-group" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;">
+            <div class="code-block-label">Windows (PowerShell)</div>
+            <div class="code-block" style="margin:0;"><span class="prompt">PS&gt;</span> Get-FileHash HydrivaX-v2.0-Server-amd64.iso -Algorithm SHA256</div>
+            <div class="code-block-label">Linux / macOS</div>
+            <div class="code-block" style="margin:0;"><span class="prompt">$</span> sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
+          </div>
           <p>Expected SHA256: <code>0308df0b2eb545c4119bc2c0e352400a75b41dc4160483527adc048c9be3c424</code></p>
         </div>
       </div>
@@ -75,12 +76,8 @@ sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
         <div>
           <h3>Install permanently to disk</h3>
           <p>The installer wipes the selected disk, creates a universal GPT layout with BIOS boot, EFI, and ext4 root partitions, clones the HydrivaX runtime with <code>rsync -aAXv</code>, writes UUID-based <code>/etc/fstab</code>, and installs GRUB for BIOS and UEFI.</p>
-          <div class="code-block"><span class="prompt">$</span> hx install
-
-<span class="prompt"># direct commands also work</span>
-sudo hx-deploy install
-
-sudo hx-install</div>
+          <div class="code-block"><span class="prompt">$</span> hx install</div>
+          <p style="margin-top:0.6rem; font-size:0.82rem; color:var(--text-muted);">Alternative alias commands: <code>sudo hx-deploy install</code> or <code>sudo hx-install</code></p>
           <p>Examples of valid target disks: <code>/dev/sda</code>, <code>/dev/vda</code>, <code>/dev/nvme0n1</code>, <code>/dev/mmcblk0</code>.</p>
         </div>
       </div>
@@ -106,11 +103,12 @@ sudo hx-install</div>
         <div class="step-num">1</div>
         <div>
           <h3>Download and verify</h3>
-          <div class="code-block"><span class="prompt"># Windows</span>
-Get-FileHash HydrivaX-v2.0-Desktop-amd64.iso -Algorithm SHA256
-
-<span class="prompt"># Linux / macOS</span>
-sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
+          <div class="code-block-group" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;">
+            <div class="code-block-label">Windows (PowerShell)</div>
+            <div class="code-block" style="margin:0;"><span class="prompt">PS&gt;</span> Get-FileHash HydrivaX-v2.0-Desktop-amd64.iso -Algorithm SHA256</div>
+            <div class="code-block-label">Linux / macOS</div>
+            <div class="code-block" style="margin:0;"><span class="prompt">$</span> sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
+          </div>
           <p>Expected SHA256: <code>1b8436ed3bffab6953442f347654157f40987a9039846cd41a6fe2bbca17095a</code></p>
         </div>
       </div>
@@ -180,8 +178,7 @@ sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
       <div class="steps-option-banner" style="background:rgba(1,218,254,0.08);border-left:4px solid #01DAFE;padding:1.25rem;border-radius:4px;margin-bottom:2rem;">
         <h3 style="margin-top:0;color:#01DAFE;font-size:1.1rem;display:flex;align-items:center;gap:0.5rem;">🚀 Proxmox Autopilot Helper (Recommended)</h3>
         <p style="margin:0 0 1rem;font-size:0.9rem;">To automatically download the template and configure a new LXC container with a single command, run this directly on your Proxmox VE host terminal:</p>
-        <div class="code-block" style="margin:0;font-size:0.8rem;background:rgba(0,0,0,0.3);"><span class="prompt"># Run on PVE host</span>
-bash -c "$(curl -fsSL https://boubli.github.io/HydrivaX/install-lxc.sh)"</div>
+        <div class="code-block" style="margin:0; font-size:0.85rem;"><span class="prompt">#</span> bash -c "$(curl -fsSL https://boubli.github.io/HydrivaX/install-lxc.sh)"</div>
       </div>
 
       <div style="font-weight:bold;margin-bottom:1rem;color:#01DAFE;font-size:1rem;">Or deploy manually:</div>
@@ -198,9 +195,11 @@ bash -c "$(curl -fsSL https://boubli.github.io/HydrivaX/install-lxc.sh)"</div>
         <div>
           <h3>Create a container</h3>
           <p>Use the Proxmox UI to create a CT from the template. Then SSH in and use the CLI tools.</p>
-          <div class="code-block"><span class="prompt">$</span> hx-info
-<span class="prompt">$</span> hx-status
-<span class="prompt">$</span> hx-deploy list</div>
+          <div class="code-block-group" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;">
+            <div class="code-block" style="margin:0;"><span class="prompt">$</span> hx-info</div>
+            <div class="code-block" style="margin:0;"><span class="prompt">$</span> hx-status</div>
+            <div class="code-block" style="margin:0;"><span class="prompt">$</span> hx-deploy list</div>
+          </div>
         </div>
       </div>
     </div>

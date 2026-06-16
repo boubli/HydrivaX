@@ -428,7 +428,7 @@ pre, code { font-family: var(--font-mono); }
   color: var(--text-primary);
   border: 1px solid var(--border-glow);
   border-radius: var(--radius);
-  padding: 1.25rem 1.5rem;
+  padding: 0.85rem 3.5rem 0.85rem 1.1rem; /* Extra right padding prevents text overlapping the copy button */
   overflow-x: auto;
   font-size: 0.85rem;
   line-height: 1.7;
@@ -444,54 +444,72 @@ pre, code { font-family: var(--font-mono); }
   -ms-user-select: none;
 }
 
-.code-block .comment { color: #5a7a94; }
+.code-block .comment {
+  color: #5a7a94;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 
 /* ── Code block wrapper and copy button styles ── */
 .code-block-wrapper {
   position: relative;
 }
 
+.code-block-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 0.85rem;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+}
+
 .copy-btn {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
-  padding: 0.35rem 0.55rem;
-  font-size: 0.72rem;
-  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  transition: all 0.2s ease-in-out;
+  gap: 0.3rem;
+  transition: all 0.15s ease-in-out;
   z-index: 5;
   font-family: var(--font-sans);
 }
 
 .copy-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.25);
+  background: var(--cyan-bright);
+  color: var(--navy-deep) !important;
+  border-color: var(--cyan-bright);
 }
 
 .copy-btn.copied {
-  background: rgba(40, 200, 64, 0.12);
-  border-color: rgba(40, 200, 64, 0.4);
+  background: rgba(40, 200, 64, 0.15);
+  border-color: #28c840;
   color: #28c840;
 }
 
 .code-block-mini {
   display: block;
   margin-top: 0.5rem;
-  font-size: 0.7rem;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 0.5rem 2.2rem 0.5rem 0.5rem; /* Add right padding so copy button doesn't overlap text */
-  border-radius: 4px;
+  font-size: 0.72rem;
+  background: #0a1628;
+  border: 1px solid var(--border-glow);
+  padding: 0.45rem 3.5rem 0.45rem 0.6rem; /* Extra right padding to avoid overlap with copy button */
+  border-radius: 6px;
   word-break: break-all;
-  color: var(--cyan-bright);
+  color: var(--text-primary);
   font-family: var(--font-mono);
 }
 

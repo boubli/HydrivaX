@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Clone the block to manipulate it without altering the page layout
       const clone = block.cloneNode(true);
       
-      // Remove any elements that represent prompts, terminal details, or headers
-      clone.querySelectorAll('.prompt').forEach(el => el.remove());
+      // Remove any elements that represent prompts, terminal details, comments, or headers
+      clone.querySelectorAll('.prompt, .comment').forEach(el => el.remove());
       
       // Get the remaining clean code text
       let text = clone.innerText || clone.textContent;
