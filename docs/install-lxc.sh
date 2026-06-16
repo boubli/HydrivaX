@@ -160,9 +160,19 @@ else
   exit 1
 fi
 
-# 8. Start container and report status
+# 8. Start container and configure credentials
 echo -e "${BL}[Info]${CL} Starting container ${CTID}..."
 pct start "$CTID"
+
+echo -e "${BL}[Info]${CL} Configuring default root password ('hydrivax')..."
+sleep 2
+if pct exec "$CTID" -- sh -c "echo 'root:hydrivax' | chpasswd" >/dev/null 2>&1; then
+  echo -e "${GN}[Success]${CL} Root password successfully configured."
+else
+  # Retry once if container systemd was still initializing
+  sleep 2
+  pct exec "$CTID" -- sh -c "echo 'root:hydrivax' | chpasswd" >/dev/null 2>&1 || echo -e "${YW}[Warning]${CL} Could not verify password setting. You can set it manually inside the container."
+fi
 
 echo -e "${BL}[Info]${CL} Waiting for container network IP address (DHCP)..."
 IP=""
@@ -186,7 +196,8 @@ if [ -n "$IP" ]; then
 else
   echo -e "  - IP Address:  ${YW}DHCP Pending (Network configuration active)${CL}"
 fi
-echo -e "  - Login:       root / hydrivax"
+echo -e "  - Username:    ${BOLD}root${CL}"
+echo -e "  - Password:    ${GN}${BOLD}hydrivax${CL}"
 echo "--------------------------------------------------------------------------------"
 echo -e "To access the container console:    ${CY}pct enter ${CTID}${CL}"
 echo -e "To SSH into the container:          ${CY}ssh root@${IP:-<container-ip>}${CL}"
