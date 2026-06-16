@@ -176,12 +176,21 @@ sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
       <h2>Proxmox LXC Template</h2>
       <p>LXC remains a lightweight Proxmox container template. It is not for bare-metal disk installation and does not include the GUI installer workflow.</p>
     </div>
-    <div class="steps">
+    <div class="steps" style="margin-top:1.5rem;">
+      <div class="steps-option-banner" style="background:rgba(1,218,254,0.08);border-left:4px solid #01DAFE;padding:1.25rem;border-radius:4px;margin-bottom:2rem;">
+        <h3 style="margin-top:0;color:#01DAFE;font-size:1.1rem;display:flex;align-items:center;gap:0.5rem;">🚀 Proxmox Autopilot Helper (Recommended)</h3>
+        <p style="margin:0 0 1rem;font-size:0.9rem;">To automatically download the template and configure a new LXC container with a single command, run this directly on your Proxmox VE host terminal:</p>
+        <div class="code-block" style="margin:0;font-size:0.8rem;background:rgba(0,0,0,0.3);"><span class="prompt"># Run on PVE host</span>
+bash -c "$(curl -fsSL https://boubli.github.io/HydrivaX/install-lxc.sh)"</div>
+      </div>
+
+      <div style="font-weight:bold;margin-bottom:1rem;color:#01DAFE;font-size:1rem;">Or deploy manually:</div>
+
       <div class="step">
         <div class="step-num">1</div>
         <div>
           <h3>Upload the template</h3>
-          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v2.0-LXC.tar.zst root@PROXMOX_IP:/var/lib/vz/template/cache/</div>
+          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v2.5-LXC.tar.zst root@PROXMOX_IP:/var/lib/vz/template/cache/</div>
         </div>
       </div>
       <div class="step">

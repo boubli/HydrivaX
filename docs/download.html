@@ -63,13 +63,17 @@
 
       <div class="download-card">
         <img src="assets/images/logo-transparent.svg" alt="HydrivaX" width="80" height="80" style="margin:0 auto 1.5rem;">
-        <h2>HydrivaX v2.0 LXC</h2>
+        <h2>HydrivaX v2.5 LXC</h2>
         <p>Proxmox container template. Lightweight CLI-only rootfs for containers, not for bare-metal disk installation.</p>
         <a href="https://github.com/boubli/HydrivaX/releases" class="btn btn-primary" target="_blank" rel="noopener">Download LXC Template</a>
-        <div class="download-meta">
-          <span>File: <strong>HydrivaX-v2.0-LXC.tar.zst</strong></span>
+        <div class="download-meta" style="margin-bottom:1rem;">
+          <span>File: <strong>HydrivaX-v2.5-LXC.tar.zst</strong></span>
           <span>Format: <strong>.tar.zst</strong></span>
         </div>
+        <p class="download-note" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:0.75rem;">
+          <strong>Proxmox Autopilot:</strong> Run on your host CLI to download and create CT:
+          <code style="display:block;margin-top:0.5rem;font-size:0.7rem;background:rgba(0,0,0,0.3);padding:0.4rem;border-radius:4px;word-break:break-all;color:#01DAFE;">bash -c "$(curl -fsSL https://boubli.github.io/HydrivaX/install-lxc.sh)"</code>
+        </p>
       </div>
     </div>
   </div>
