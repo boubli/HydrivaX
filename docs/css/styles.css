@@ -513,6 +513,26 @@ pre, code { font-family: var(--font-mono); }
   font-family: var(--font-mono);
 }
 
+/* ── Terminal Animation Styles ── */
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: var(--cyan-bright);
+  margin-left: 5px;
+  animation: cursor-blink 0.8s infinite;
+  vertical-align: middle;
+}
+
+@keyframes cursor-blink {
+  0%, 49% { background: var(--cyan-bright); }
+  50%, 100% { background: transparent; }
+}
+
+.terminal-ascii, .terminal-subtitle, .terminal-status, .terminal-command {
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+}
+
 /* ── Modules ── */
 .module-search {
   width: 100%;
