@@ -17,10 +17,10 @@ Two editions are supported:
 | Edition | Format | Size | Use case |
 |---------|--------|------|----------|
 | **HydrivaX OS Server** | bootable `.iso` | 586 MB | Servers, old PCs, mini PCs, VirtualBox, Proxmox VMs |
-| **HydrivaX OS Desktop** | bootable `.iso` | 1008 MB | HydrivaX graphical desktop for VMs and physical machines |
+| **HydrivaX OS Desktop** | bootable `.iso` | 1.1 GB | HydrivaX graphical desktop for VMs and physical machines |
 | **LXC Template** | `.tar.zst` | 99 MB | Proxmox containers |
 
-The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The Server ISO is CLI-only and installable with `hx install` or `hx-deploy install`; it does not include GUI packages or a GUI install command. The Desktop ISO adds HydrivaX Desktop Core and launches the installer automatically on first desktop boot.
+The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The Server ISO is CLI-only and installable with `hx install` or `hx-deploy install`; it does not include GUI packages or a GUI install command. The Desktop ISO adds HydrivaX Desktop Core (Cubic workflow): PNG wallpapers, Tela open-source icons, and automatic installer on first desktop boot. The Server ISO is CLI-only with no GUI packages or `hx gui` command.
 
 ## CLI
 
@@ -304,7 +304,7 @@ hx-deploy list
 | | Server ISO | Desktop ISO | LXC Template |
 |---|---|---|---|
 | Base | HydrivaX OS v2.0 Server | HydrivaX OS v2.0 Desktop | HydrivaX OS v2.0 LXC |
-| Size | 586 MB | 1008 MB | 99 MB compressed |
+| Size | 586 MB | 1.1 GB | 99 MB compressed |
 | Format | Bootable amd64 ISO | Bootable amd64 ISO | Proxmox LXC `.tar.zst` |
 | Target | VMs, mini PCs, old hardware | GUI desktops, laptops, VMs | Proxmox containers |
 | Installer | `hx install` / `hx-deploy install` / `hx-install` | GRUB installer + automatic first-boot installer | not included |
