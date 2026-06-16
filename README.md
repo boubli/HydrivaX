@@ -20,7 +20,7 @@ Two editions are supported:
 | **HydrivaX OS Desktop** | bootable `.iso` | 1.1 GB | HydrivaX graphical desktop for VMs and physical machines |
 | **LXC Template** | `.tar.zst` | 99 MB | Proxmox containers |
 
-The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, no locales. The Server ISO is CLI-only and installable with `hx install` or `hx-deploy install`; it does not include GUI packages or a GUI install command. The Desktop ISO adds HydrivaX Desktop Core (Cubic workflow): PNG wallpapers, Tela open-source icons, and automatic installer on first desktop boot. The Server ISO is CLI-only with no GUI packages or `hx gui` command.
+The LXC rootfs is aggressively stripped: no kernel modules, no firmware, no bootloader, and no locales. The Server ISO is CLI-only and installable with `hx install` or `hx-deploy install` (no GUI packages or `hx gui` commands are included). The Desktop ISO includes HydrivaX Desktop Core, featuring PNG wallpapers, Tela open-source icons, and an installer that launches automatically on first boot.
 
 ## CLI
 
@@ -130,9 +130,9 @@ sudo hx-deploy install
 sudo hx-install
 ```
 
-### HydrivaX OS v2.0 Desktop ISO
+### HydrivaX OS v2.1 Desktop ISO
 
-Download `HydrivaX-v2.0-Desktop-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
+Download `HydrivaX-v2.1-Desktop-amd64.iso` from [Releases](https://github.com/boubli/HydrivaX/releases).
 
 Boot the ISO and the HydrivaX Desktop Core session starts automatically. The installer opens on first desktop boot, or you can launch it from the dock/desktop shortcut:
 
@@ -147,11 +147,11 @@ Recommended boot entries:
 
 ### LXC template
 
-Download `HydrivaX-v2.0-LXC.tar.zst` from [Releases](https://github.com/boubli/HydrivaX/releases).
+Download `HydrivaX-v2.5-LXC.tar.zst` from [Releases](https://github.com/boubli/HydrivaX/releases).
 
 ```bash
 # upload to proxmox
-scp HydrivaX-v2.0-LXC.tar.zst root@PROXMOX_IP:/var/lib/vz/template/cache/
+scp HydrivaX-v2.5-LXC.tar.zst root@PROXMOX_IP:/var/lib/vz/template/cache/
 
 # create container from proxmox ui, then:
 hx-info
@@ -303,7 +303,7 @@ hx-deploy list
 
 | | Server ISO | Desktop ISO | LXC Template |
 |---|---|---|---|
-| Base | HydrivaX OS v2.0 Server | HydrivaX OS v2.0 Desktop | HydrivaX OS v2.0 LXC |
+| Base | HydrivaX OS v2.0 Server | HydrivaX OS v2.1 Desktop | HydrivaX OS v2.5 LXC |
 | Size | 586 MB | 1.1 GB | 99 MB compressed |
 | Format | Bootable amd64 ISO | Bootable amd64 ISO | Proxmox LXC `.tar.zst` |
 | Target | VMs, mini PCs, old hardware | GUI desktops, laptops, VMs | Proxmox containers |
