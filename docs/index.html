@@ -56,24 +56,28 @@
       <div class="terminal-screen">
         <div class="terminal-content" aria-label="HydrivaX CLI preview">
           <div class="terminal-ascii">HYDRIVAX</div>
-          <div class="terminal-subtitle">HydrivaX OS v2.0 | Modular Infrastructure</div>
+          <div class="terminal-subtitle">HydrivaX OS v2.0 | Server + Desktop</div>
 
-          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-status</div>
-          <div class="terminal-output" style="color: #a9adc1; font-family: monospace;">
-            <!-- Placeholder for hx-status screenshot representation -->
-            CPU: [||||      ] 3%<br>
-            RAM: [||        ] 42MB / 512MB<br>
-            DSK: [||        ] 346MB / 8.0GB<br>
-            <br>
-            System is running optimally. 0 modules deployed.
+          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-info</div>
+          <div class="terminal-output">
+            <div><span>Core Architect</span> Youssef Boubli</div>
+            <div><span>Edition</span> Headless CLI</div>
+            <div><span>Base</span> HydrivaX OS v2.0</div>
+            <div><span>Template</span> Proxmox LXC · 99 MB</div>
+            <div><span>Server ISO</span> Installable · 586 MB</div>
+            <div><span>Desktop ISO</span> HydrivaX Desktop Core · 1.1 GB</div>
           </div>
 
-          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-deploy docker</div>
-          <div class="terminal-output" style="color: #7bbf8e; font-family: monospace;">
-            [*] Fetching module 'docker'...<br>
-            [*] Installing dependencies... Done.<br>
-            [*] Docker service started and enabled.
+          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-deploy list</div>
+          <div class="terminal-modules">
+            <span>wireguard</span>
+            <span>docker</span>
+            <span>grafana</span>
+            <span>nextcloud</span>
+            <span>k3s</span>
+            <span>restic</span>
           </div>
+          <div class="terminal-status">99 modules available · nothing pre-installed · deploy on demand</div>
         </div>
       </div>
     </div>
