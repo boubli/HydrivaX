@@ -153,7 +153,8 @@ if pct create "$CTID" "$TPL_PATH" \
   -features nesting=1 \
   -onboot 1 \
   -hostname "$HN" \
-  -tags "hydrivax;os;lxc"; then
+  -tags "hydrivax;os;lxc" \
+  -password "hydrivax"; then
   echo -e "${GN}[Success]${CL} Container created successfully."
 else
   echo -e "${RD}[Error]${CL} Failed to create LXC container."
