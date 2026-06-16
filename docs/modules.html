@@ -18,9 +18,9 @@
     <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="install.html">Install</a></li>
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
       <li><a href="modules.html" class="active">Modules</a></li>
-      <li><a href="specs.html">Specs</a></li>
       <li><a href="download.html" class="nav-cta">Download</a></li>
     </ul>
   </div>
@@ -28,14 +28,44 @@
 
 <section class="page-hero">
   <div class="container">
-    <h1>99 Deployable Modules</h1>
-    <p>Nothing is pre-installed. Install on demand with <code>hx-deploy &lt;module&gt;</code>.</p>
+    <h1>Module Catalog</h1>
+    <p>Browse our catalog of 99 deployable modules. Install on demand with <code>hx-deploy &lt;module&gt;</code>.</p>
   </div>
 </section>
 
 <section class="section section-light">
   <div class="container">
     <input type="search" class="module-search" id="module-search" placeholder="Search modules…" aria-label="Search modules">
+
+    <div id="featured-modules" style="margin-bottom: 3rem;">
+      <h3>Featured Modules Deep Dive</h3>
+      
+      <div class="cmd-card" style="background: #ffffff; border: 1px solid #d0e4f0; padding: 1.5rem; border-radius: var(--radius); margin-bottom: 1.5rem; text-align: left;">
+        <h4 style="color: var(--blue-accent); margin-bottom: 0.5rem; font-size: 1.25rem;">Docker</h4>
+        <p><strong>Description:</strong> Container runtime platform with Docker Compose v2.<br>
+        <strong>Category:</strong> Dev & Coding<br>
+        <strong>Dependencies:</strong> containerd, runc, iptables<br>
+        <strong>Resource requirements:</strong> ~80MB RAM overhead</p>
+        <div style="margin-top: 1rem;">
+          <strong>Install:</strong>
+          <div class="code-block-mini" style="margin-top: 0.5rem; font-family: monospace;">hx-deploy docker</div>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: #5a7a94;"><strong>Configuration Notes:</strong> The Docker daemon is automatically configured to use overlay2 storage and logs are rotated automatically.</p>
+      </div>
+
+      <div class="cmd-card" style="background: #ffffff; border: 1px solid #d0e4f0; padding: 1.5rem; border-radius: var(--radius); margin-bottom: 1.5rem; text-align: left;">
+        <h4 style="color: var(--blue-accent); margin-bottom: 0.5rem; font-size: 1.25rem;">WireGuard</h4>
+        <p><strong>Description:</strong> Fast, modern, secure VPN tunnel.<br>
+        <strong>Category:</strong> Networking & Security<br>
+        <strong>Dependencies:</strong> wireguard-tools, iproute2<br>
+        <strong>Resource requirements:</strong> ~10MB RAM overhead</p>
+        <div style="margin-top: 1rem;">
+          <strong>Install:</strong>
+          <div class="code-block-mini" style="margin-top: 0.5rem; font-family: monospace;">hx-deploy wireguard</div>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: #5a7a94;"><strong>Configuration Notes:</strong> Generates default keys in `/etc/wireguard`. Ensure UDP port 51820 is forwarded on your router.</p>
+      </div>
+    </div>
 
     <div class="module-category" id="networking">
       <h3>Networking &amp; Security (20)</h3>
@@ -172,10 +202,10 @@
   <div class="container footer-inner">
     <p>Non-Commercial License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
     <ul class="footer-links">
-      <li><a href="install.html">Install</a></li>
-      <li><a href="modules.html">Modules</a></li>
-      <li><a href="specs.html">Specs</a></li>
-      <li><a href="download.html">Download</a></li>
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="security.html">Security</a></li>
     </ul>
   </div>
 </footer>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Start — HydrivaX OS</title>
+  <meta name="description" content="Deploy HydrivaX in under 5 minutes with our Quick Start Guide.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="HydrivaX home">
+      <img src="assets/images/navbar-logo.svg" alt="HydrivaX">
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quickstart.html" class="active">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="download.html" class="nav-cta">Download</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" style="display: flex; gap: 2rem; margin-top: 2rem; padding-bottom: 4rem; flex-wrap: wrap;">
+  
+  <!-- Sidebar Navigation -->
+  <aside style="flex: 0 0 250px; border-right: 1px solid var(--border-glow); padding-right: 1.5rem;">
+    <h3 style="color: var(--cyan-bright); margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Documentation</h3>
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+      <li><a href="quickstart.html" style="color: var(--cyan-bright); font-weight: 600;">Quick Start</a></li>
+      <li><a href="install.html" style="color: var(--text-muted); text-decoration: none;">Installation Guides</a></li>
+      <li><a href="commands.html" style="color: var(--text-muted); text-decoration: none;">CLI Commands</a></li>
+      <li><a href="modules.html" style="color: var(--text-muted); text-decoration: none;">Module Catalog</a></li>
+      <li><a href="architecture.html" style="color: var(--text-muted); text-decoration: none;">Architecture</a></li>
+      <li><a href="security.html" style="color: var(--text-muted); text-decoration: none;">Security</a></li>
+      <li><a href="faq.html" style="color: var(--text-muted); text-decoration: none;">FAQ</a></li>
+      <li><a href="compare.html" style="color: var(--text-muted); text-decoration: none;">Comparison</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main style="flex: 1; min-width: 300px; max-width: 800px;">
+    <h1 style="margin-bottom: 0.5rem; font-size: 2.5rem;">Quick Start Guide</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Deploy HydrivaX in under 5 minutes on Proxmox VE.</p>
+
+    <div class="step" style="margin-bottom: 1.5rem; flex-direction: column;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <div class="step-num">1</div>
+        <h3 style="margin: 0; font-size: 1.25rem;">Prerequisites</h3>
+      </div>
+      <p>Ensure you have a running Proxmox VE host and SSH or console access to it. You do not need to download the ISO or template manually; our Autopilot script handles it.</p>
+    </div>
+
+    <div class="step" style="margin-bottom: 1.5rem; flex-direction: column;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <div class="step-num">2</div>
+        <h3 style="margin: 0; font-size: 1.25rem;">Run the Autopilot Installer</h3>
+      </div>
+      <p>Log in to your Proxmox VE node's shell and execute the following command. It will download the HydrivaX template and automatically provision an LXC container for you.</p>
+      <div class="code-block-wrapper">
+        <div class="code-block" style="margin-top: 0;"><span class="prompt">root@pve:~#</span> bash -c "$(curl -fsSL https://boubli.github.io/HydrivaX/install-lxc.sh)"</div>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);"><em>Follow the interactive prompts to assign an ID, hostname, and password.</em></p>
+    </div>
+
+    <div class="step" style="margin-bottom: 1.5rem; flex-direction: column;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <div class="step-num">3</div>
+        <h3 style="margin: 0; font-size: 1.25rem;">First Boot & Verification</h3>
+      </div>
+      <p>Once the container is running, log into it using the password you set. Verify the system is healthy using the built-in status command.</p>
+      <div class="code-block-wrapper">
+        <div class="code-block" style="margin-top: 0;"><span class="prompt">root@hydrivax:~#</span> hx-status</div>
+        <button class="copy-btn">Copy</button>
+      </div>
+    </div>
+
+    <div class="step" style="margin-bottom: 1.5rem; flex-direction: column;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <div class="step-num">4</div>
+        <h3 style="margin: 0; font-size: 1.25rem;">Deploy Your First Module</h3>
+      </div>
+      <p>HydrivaX ships stripped down. To start running services, deploy a module like Docker. This command automatically installs dependencies, configures the daemon, and starts the service.</p>
+      <div class="code-block-wrapper">
+        <div class="code-block" style="margin-top: 0;"><span class="prompt">root@hydrivax:~#</span> hx-deploy docker</div>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <p style="margin-top: 1rem;">Congratulations! You have successfully deployed HydrivaX and provisioned your first service module.</p>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Non-Commercial License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
+    <ul class="footer-links">
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="security.html">Security</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="js/copy.js"></script>
+</body>
+</html>

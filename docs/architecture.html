@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture — HydrivaX OS</title>
+  <meta name="description" content="Understanding the internal architecture, package management, and service lifecycle of HydrivaX OS.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: { primaryColor: '#0a1628', primaryTextColor: '#01dafe', primaryBorderColor: '#01dafe', lineColor: '#5a7a94' } });
+  </script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="HydrivaX home">
+      <img src="assets/images/navbar-logo.svg" alt="HydrivaX">
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html" class="active">Docs</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="download.html" class="nav-cta">Download</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" style="display: flex; gap: 2rem; margin-top: 2rem; padding-bottom: 4rem; flex-wrap: wrap;">
+  
+  <aside style="flex: 0 0 250px; border-right: 1px solid var(--border-glow); padding-right: 1.5rem;">
+    <h3 style="color: var(--cyan-bright); margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Documentation</h3>
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+      <li><a href="quickstart.html" style="color: var(--text-muted); text-decoration: none;">Quick Start</a></li>
+      <li><a href="install.html" style="color: var(--text-muted); text-decoration: none;">Installation Guides</a></li>
+      <li><a href="commands.html" style="color: var(--text-muted); text-decoration: none;">CLI Commands</a></li>
+      <li><a href="modules.html" style="color: var(--text-muted); text-decoration: none;">Module Catalog</a></li>
+      <li><a href="architecture.html" style="color: var(--cyan-bright); font-weight: 600;">Architecture</a></li>
+      <li><a href="security.html" style="color: var(--text-muted); text-decoration: none;">Security</a></li>
+      <li><a href="faq.html" style="color: var(--text-muted); text-decoration: none;">FAQ</a></li>
+      <li><a href="compare.html" style="color: var(--text-muted); text-decoration: none;">Comparison</a></li>
+    </ul>
+  </aside>
+
+  <main style="flex: 1; min-width: 300px; max-width: 800px;">
+    <h1 style="margin-bottom: 0.5rem; font-size: 2.5rem;">System Architecture</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">HydrivaX is designed with a radically minimal core, where every piece of functionality is an isolated module.</p>
+
+    <h2>1. Core System Structure</h2>
+    <p>The HydrivaX core rootfs contains only <code>systemd</code>, <code>bash</code>, basic coreutils, and our custom <code>hx-*</code> toolchain. Everything else is removed to achieve a sub-100MB compressed template.</p>
+    
+    <div class="mermaid" style="margin: 2rem 0; background: var(--bg-card); border: 1px solid var(--border-glow); padding: 1.5rem; border-radius: 8px;">
+      graph TD
+      A[Proxmox VE / Hypervisor] --> B(HydrivaX Core OS)
+      B --> C{hx-deploy}
+      B --> D[Systemd Init]
+      C --> E[Module: Networking]
+      C --> F[Module: Docker]
+      C --> G[Module: Database]
+    </div>
+
+    <h2>2. Module Deployment System</h2>
+    <p>HydrivaX relies on <code>hx-deploy</code> rather than standard <code>apt-get</code> commands for user interaction. When you deploy a module, <code>hx-deploy</code> fetches the definition from the HydrivaX catalog, resolves dependencies dynamically, configures the service, and enables it automatically.</p>
+
+    <h2>3. Service Lifecycle</h2>
+    <p>Services deployed via modules are managed strictly by <code>systemd</code>. However, HydrivaX wraps standard systemd calls in its own tools to ensure permissions and dependencies don't drift. For instance, running <code>hx-deploy remove nginx</code> will automatically stop the service, disable it, flush the configuration, and prune orphaned dependencies.</p>
+
+    <div class="mermaid" style="margin: 2rem 0; background: var(--bg-card); border: 1px solid var(--border-glow); padding: 1.5rem; border-radius: 8px;">
+      sequenceDiagram
+      User->>hx-deploy: hx-deploy docker
+      hx-deploy->>Module Catalog: Fetch Docker definitions
+      Module Catalog-->>hx-deploy: Dependencies: runc, containerd
+      hx-deploy->>APT: Install packages silently
+      hx-deploy->>Systemd: Write daemon.json, enable & start docker.service
+      Systemd-->>User: Success (Module active)
+    </div>
+
+    <h2>4. Update Process</h2>
+    <p>Because HydrivaX is heavily stripped, standard Linux kernel updates inside the LXC container are bypassed. To update, simply run <code>hx-update</code>. This will update the module catalog and pull the latest user-space security patches from the Debian upstream without modifying your custom configurations.</p>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Non-Commercial License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
+    <ul class="footer-links">
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="security.html">Security</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="js/copy.js"></script>
+</body>
+</html>

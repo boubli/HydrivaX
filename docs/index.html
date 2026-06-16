@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HydrivaX — Lightweight Server, Desktop, and LXC Infrastructure OS</title>
-  <meta name="description" content="HydrivaX OS v2.0 ships as installable Server and Desktop ISOs plus a Proxmox LXC template.">
+  <title>HydrivaX — Lightweight Modular OS</title>
+  <meta name="description" content="HydrivaX is a lightweight modular Linux distribution optimized for Proxmox LXC containers and self-hosted infrastructure.">
   <meta property="og:title" content="HydrivaX">
-  <meta property="og:description" content="Installable HydrivaX OS v2.0 Server/Desktop ISOs and lightweight Proxmox LXC template.">
+  <meta property="og:description" content="HydrivaX is a lightweight modular Linux distribution optimized for Proxmox LXC containers and self-hosted infrastructure.">
   <meta property="og:image" content="assets/images/og-image.svg">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
@@ -21,9 +21,9 @@
     <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="install.html">Install</a></li>
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
       <li><a href="modules.html">Modules</a></li>
-      <li><a href="specs.html">Specs</a></li>
       <li><a href="download.html" class="nav-cta">Download</a></li>
     </ul>
   </div>
@@ -33,12 +33,19 @@
   <canvas id="hero-particles"></canvas>
   <div class="container hero-grid">
     <div class="hero-content">
-      <span class="hero-badge">Server ISO · Desktop ISO · LXC Template</span>
-      <h1>HydrivaX OS v2.0 for <span>machines and containers</span></h1>
-      <p class="hero-tagline">Install the Server ISO on VMs and bare metal, boot the custom HydrivaX Desktop ISO, or deploy the lightweight Proxmox LXC template.</p>
+      <span class="hero-badge">Proxmox LXC · VM · Bare Metal</span>
+      <h1>Modular Linux for <span>self-hosted infrastructure</span></h1>
+      <p class="hero-tagline">HydrivaX is a lightweight modular Linux distribution optimized for Proxmox LXC containers and self-hosted infrastructure. It is aggressively stripped, blisteringly fast, and deploys services on demand.</p>
       <div class="hero-actions">
-        <a href="download.html" class="btn btn-primary">Download Release</a>
-        <a href="install.html" class="btn btn-ghost">Install Guide</a>
+        <a href="quickstart.html" class="btn btn-primary">Quick Start</a>
+        <a href="download.html" class="btn btn-ghost">Download Release</a>
+      </div>
+      <div style="margin-top: 1.5rem; color: var(--text-muted); font-size: 0.85rem; display: flex; gap: 1rem; align-items: center;">
+        <span><strong style="color:var(--cyan-bright)">99MB</strong> Template</span>
+        <span>|</span>
+        <span><strong style="color:var(--cyan-bright)">346MB</strong> Rootfs</span>
+        <span>|</span>
+        <span><strong style="color:var(--cyan-bright)">99</strong> Modules</span>
       </div>
     </div>
     <div class="hero-visual cli-showcase terminal-frame hero-terminal">
@@ -49,87 +56,25 @@
       <div class="terminal-screen">
         <div class="terminal-content" aria-label="HydrivaX CLI preview">
           <div class="terminal-ascii">HYDRIVAX</div>
-          <div class="terminal-subtitle">HydrivaX OS v2.0 | Server + Desktop</div>
+          <div class="terminal-subtitle">HydrivaX OS v2.0 | Modular Infrastructure</div>
 
-          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-info</div>
-          <div class="terminal-output">
-            <div><span>Core Architect</span> Youssef Boubli</div>
-            <div><span>Edition</span> Headless CLI</div>
-            <div><span>Base</span> HydrivaX OS v2.0</div>
-            <div><span>Template</span> Proxmox LXC · 99 MB</div>
-            <div><span>Server ISO</span> Installable · 586 MB</div>
-            <div><span>Desktop ISO</span> HydrivaX Desktop Core · 1.1 GB</div>
+          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-status</div>
+          <div class="terminal-output" style="color: #a9adc1; font-family: monospace;">
+            <!-- Placeholder for hx-status screenshot representation -->
+            CPU: [||||      ] 3%<br>
+            RAM: [||        ] 42MB / 512MB<br>
+            DSK: [||        ] 346MB / 8.0GB<br>
+            <br>
+            System is running optimally. 0 modules deployed.
           </div>
 
-          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-deploy list</div>
-          <div class="terminal-modules">
-            <span>wireguard</span>
-            <span>docker</span>
-            <span>grafana</span>
-            <span>nextcloud</span>
-            <span>k3s</span>
-            <span>restic</span>
+          <div class="terminal-command"><span>root@hydrivax:~#</span> hx-deploy docker</div>
+          <div class="terminal-output" style="color: #7bbf8e; font-family: monospace;">
+            [*] Fetching module 'docker'...<br>
+            [*] Installing dependencies... Done.<br>
+            [*] Docker service started and enabled.
           </div>
-          <div class="terminal-status">99 modules available · nothing pre-installed · deploy on demand</div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="container stats-bar">
-  <div class="stat-card">
-    <div class="stat-value">99 MB</div>
-    <div class="stat-label">Template Size</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value">346 MB</div>
-    <div class="stat-label">Rootfs</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value">99</div>
-    <div class="stat-label">Modules</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value">D12</div>
-    <div class="stat-label">HydrivaX Core</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value">ISO</div>
-    <div class="stat-label">Bootable OS</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value">LXC</div>
-    <div class="stat-label">Proxmox</div>
-  </div>
-</div>
-
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2>Why HydrivaX</h2>
-      <p>Everything a container doesn't need is gone. What remains is a fast, headless foundation built for deploying your own services on demand.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Aggressively stripped</h3>
-        <p>No kernel modules, no firmware, no bootloader, no locales. The rootfs is trimmed to what an LXC container actually needs.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📦</div>
-        <h3>On-demand modules</h3>
-        <p>Nothing is pre-installed. Run <code>hx-deploy docker</code> or any of 99 modules when you need them — remove them just as easily.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💿</div>
-        <h3>Installable OS ISOs</h3>
-        <p>HydrivaX OS v2.0 ships as install-first Server and Desktop ISOs. Start the installer with <code>hx install</code>, then reboot from disk.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🖥️</div>
-        <h3>HydrivaX Desktop Core</h3>
-        <p>The Desktop ISO adds a branded graphical interface, custom wallpaper, dock, HydrivaX apps, and first-boot installer launcher.</p>
       </div>
     </div>
   </div>
@@ -138,15 +83,28 @@
 <section class="section section-light">
   <div class="container">
     <div class="section-header">
-      <h2>99 Deployable Modules</h2>
-      <p>Five categories covering networking, storage, development, monitoring, and automation.</p>
+      <h2>Why choose HydrivaX?</h2>
+      <p>Traditional server OSes are bloated. Standard LXC templates lack management tools. HydrivaX gives you the best of both worlds.</p>
     </div>
-    <div class="categories">
-      <a href="modules.html#networking" class="category-pill">Networking &amp; Security</a>
-      <a href="modules.html#storage" class="category-pill">Storage &amp; Data</a>
-      <a href="modules.html#dev" class="category-pill">Dev &amp; Coding</a>
-      <a href="modules.html#monitoring" class="category-pill">Monitoring &amp; Telemetry</a>
-      <a href="modules.html#automation" class="category-pill">Automation &amp; Utilities</a>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>Aggressively Stripped</h3>
+        <p>No kernel modules, no firmware, no bootloader, no locales. HydrivaX starts at just 346MB on disk and idles at 40MB RAM. Much lighter than Debian or Ubuntu Server.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <h3>On-Demand Modularity</h3>
+        <p>Nothing is pre-installed. Need Docker? Run <code>hx-deploy docker</code>. Need Wireguard? <code>hx-deploy wireguard</code>. Everything is installed on demand with full configuration.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖥️</div>
+        <h3>First-Class LXC Support</h3>
+        <p>Built from the ground up for Proxmox LXC, solving common containerization headaches (like nesting, permissions, and apparmor) out of the box.</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="compare.html" class="btn btn-primary" style="background: var(--bg-card); color: var(--navy-deep); border: 1px solid var(--blue-accent);">See Comparison vs Debian & Alpine</a>
     </div>
   </div>
 </section>
@@ -154,21 +112,24 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2>CLI Tools</h2>
-      <p>Everything you need to manage and deploy from the terminal.</p>
+      <h2>Built for Modern Self-Hosting</h2>
+      <p>Everything you need is managed from a clean, beautifully formatted CLI.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">
         <h3><code>hx-deploy</code></h3>
-        <p>Install modules and run <code>hx install</code> or <code>hx-deploy install</code> to deploy HydrivaX permanently to disk.</p>
+        <p>The core of HydrivaX. Deploy over 99 pre-configured modules including K3s, Nextcloud, Restic, Grafana, and more instantly.</p>
+        <a href="commands.html#hx-deploy" style="color:var(--cyan-bright); font-size:0.85rem; margin-top:1rem; display:inline-block;">Read documentation →</a>
       </div>
       <div class="feature-card">
         <h3><code>hx-status</code></h3>
-        <p>System dashboard showing CPU, RAM, disk usage, and running services at a glance.</p>
+        <p>A beautifully formatted system dashboard showing CPU, RAM, disk usage, and running services at a glance.</p>
+        <a href="commands.html#hx-status" style="color:var(--cyan-bright); font-size:0.85rem; margin-top:1rem; display:inline-block;">Read documentation →</a>
       </div>
       <div class="feature-card">
         <h3><code>hx-info</code></h3>
-        <p>OS version, edition details, and system information in a clean branded output.</p>
+        <p>Get instant OS version, edition details, and system architecture information in a branded output.</p>
+        <a href="commands.html#hx-info" style="color:var(--cyan-bright); font-size:0.85rem; margin-top:1rem; display:inline-block;">Read documentation →</a>
       </div>
     </div>
   </div>
@@ -178,10 +139,10 @@
   <div class="container footer-inner">
     <p>Non-Commercial License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
     <ul class="footer-links">
-      <li><a href="install.html">Install</a></li>
-      <li><a href="modules.html">Modules</a></li>
-      <li><a href="specs.html">Specs</a></li>
-      <li><a href="download.html">Download</a></li>
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="security.html">Security</a></li>
     </ul>
   </div>
 </footer>

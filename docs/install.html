@@ -3,10 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Install — HydrivaX</title>
-  <meta name="description" content="Install HydrivaX OS v2.0 Server, HydrivaX OS v2.0 Desktop, or deploy the Proxmox LXC template.">
+  <title>Installation Guides — HydrivaX OS</title>
+  <meta name="description" content="Detailed installation instructions for HydrivaX on Proxmox LXC, Virtual Machines, Bare Metal, and Cloud VPS.">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .tab-nav { display: flex; gap: 1rem; border-bottom: 1px solid var(--border-glow); margin-bottom: 2rem; }
+    .tab-btn { background: none; border: none; color: var(--text-muted); font-size: 1rem; padding: 0.75rem 1rem; cursor: pointer; font-family: var(--font-sans); }
+    .tab-btn.active { color: var(--cyan-bright); border-bottom: 2px solid var(--cyan-bright); font-weight: 600; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .req-list { list-style: square; padding-left: 1.5rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  </style>
 </head>
 <body>
 
@@ -18,206 +26,203 @@
     <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="install.html" class="active">Install</a></li>
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html" class="active">Docs</a></li>
       <li><a href="modules.html">Modules</a></li>
-      <li><a href="specs.html">Specs</a></li>
       <li><a href="download.html" class="nav-cta">Download</a></li>
     </ul>
   </div>
 </nav>
 
-<section class="page-hero">
-  <div class="container">
-    <h1>Install HydrivaX OS v2.0</h1>
-    <p>Server ISO for CLI infrastructure, Desktop ISO for a graphical HydrivaX environment, and LXC for Proxmox containers.</p>
-  </div>
-</section>
+<div class="container" style="display: flex; gap: 2rem; margin-top: 2rem; padding-bottom: 4rem; flex-wrap: wrap;">
+  
+  <!-- Sidebar Navigation -->
+  <aside style="flex: 0 0 250px; border-right: 1px solid var(--border-glow); padding-right: 1.5rem;">
+    <h3 style="color: var(--cyan-bright); margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Documentation</h3>
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+      <li><a href="quickstart.html" style="color: var(--text-muted); text-decoration: none;">Quick Start</a></li>
+      <li><a href="install.html" style="color: var(--cyan-bright); font-weight: 600;">Installation Guides</a></li>
+      <li><a href="commands.html" style="color: var(--text-muted); text-decoration: none;">CLI Commands</a></li>
+      <li><a href="modules.html" style="color: var(--text-muted); text-decoration: none;">Module Catalog</a></li>
+      <li><a href="architecture.html" style="color: var(--text-muted); text-decoration: none;">Architecture</a></li>
+      <li><a href="security.html" style="color: var(--text-muted); text-decoration: none;">Security</a></li>
+      <li><a href="faq.html" style="color: var(--text-muted); text-decoration: none;">FAQ</a></li>
+      <li><a href="compare.html" style="color: var(--text-muted); text-decoration: none;">Comparison</a></li>
+    </ul>
+  </aside>
 
-<section class="section" id="server-iso">
-  <div class="container">
-    <div class="section-header">
-      <h2>Server ISO: VM or Bare Metal</h2>
-      <p><code>HydrivaX-v2.0-Server-amd64.iso</code> is install-first media. Pick <strong>Install HydrivaX OS v2.0 to Disk</strong> from the GRUB menu, or log in as root and run <code>hx install</code>.</p>
+  <!-- Main Content -->
+  <main style="flex: 1; min-width: 300px; max-width: 800px;">
+    <h1 style="margin-bottom: 0.5rem; font-size: 2.5rem;">Installation Guides</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Choose your target platform below for detailed step-by-step instructions.</p>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('lxc')">Proxmox LXC</button>
+      <button class="tab-btn" onclick="switchTab('vm')">Virtual Machine</button>
+      <button class="tab-btn" onclick="switchTab('baremetal')">Bare Metal</button>
+      <button class="tab-btn" onclick="switchTab('vps')">Cloud VPS</button>
     </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div>
-          <h3>Download and verify</h3>
-          <div class="code-block-group" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;">
-            <div class="code-block-label">Windows (PowerShell)</div>
-            <div class="code-block" style="margin:0;"><span class="prompt">PS&gt;</span> Get-FileHash HydrivaX-v2.0-Server-amd64.iso -Algorithm SHA256</div>
-            <div class="code-block-label">Linux / macOS</div>
-            <div class="code-block" style="margin:0;"><span class="prompt">$</span> sha256sum HydrivaX-v2.0-Server-amd64.iso</div>
+
+    <!-- PROXMOX LXC TAB -->
+    <div id="lxc" class="tab-content active">
+      <h2>Deploying on Proxmox VE (LXC)</h2>
+      <p>HydrivaX was originally built for Proxmox LXC. This is the fastest and most efficient deployment method.</p>
+      
+      <h3>Requirements</h3>
+      <ul class="req-list">
+        <li>Proxmox VE 7.0 or newer</li>
+        <li>Internet access on the PVE host</li>
+        <li>At least 512MB RAM and 2GB disk space for the container</li>
+      </ul>
+
+      <h3>Step-by-Step Instructions</h3>
+      <ol class="req-list">
+        <li>Log into your Proxmox VE node shell via SSH or the web UI.</li>
+        <li>Execute the Autopilot installer script:
+          <div class="code-block-wrapper">
+            <div class="code-block"><span class="prompt">root@pve:~#</span> bash -c "$(curl -fsSL https://boubli.github.io/HydrivaX/install-lxc.sh)"</div>
+            <button class="copy-btn">Copy</button>
           </div>
-          <p>Expected SHA256: <code>0308df0b2eb545c4119bc2c0e352400a75b41dc4160483527adc048c9be3c424</code></p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div>
-          <h3>Boot the ISO</h3>
-          <p>Use Proxmox VM, VirtualBox, VMware, or a flashed USB drive for physical machines. For Proxmox, upload the ISO:</p>
-          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v2.0-Server-amd64.iso root@PROXMOX_IP:/var/lib/vz/template/iso/</div>
-          <p>Recommended VM settings: BIOS/SeaBIOS, 1-2 vCPU, 1-2 GB RAM, 10-20 GB disk, SATA/SCSI/VirtIO disk, NAT or bridged network.</p>
-          <p>At the GRUB menu, select <strong>Install HydrivaX OS v2.0 to Disk</strong> (hotkey <kbd>i</kbd>). For Proxmox serial console, use <strong>Install HydrivaX OS v2.0 to Disk - Serial</strong>. The native installer starts immediately on tty1.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div>
-          <h3>Log in to HydrivaX</h3>
-          <div class="code-block"><span class="prompt">user</span> root
-<span class="prompt">pass</span> hydrivax</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div>
-          <h3>Install permanently to disk</h3>
-          <p>The installer wipes the selected disk, creates a universal GPT layout with BIOS boot, EFI, and ext4 root partitions, clones the HydrivaX runtime with <code>rsync -aAXv</code>, writes UUID-based <code>/etc/fstab</code>, and installs GRUB for BIOS and UEFI.</p>
-          <div class="code-block"><span class="prompt">$</span> hx install</div>
-          <p style="margin-top:0.6rem; font-size:0.82rem; color:var(--text-muted);">Alternative alias commands: <code>sudo hx-deploy install</code> or <code>sudo hx-install</code></p>
-          <p>Examples of valid target disks: <code>/dev/sda</code>, <code>/dev/vda</code>, <code>/dev/nvme0n1</code>, <code>/dev/mmcblk0</code>.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div>
-          <h3>Reboot into installed OS</h3>
-          <p>When the installer finishes, remove the ISO/USB media and reboot. The machine will boot from the installed disk.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        </li>
+        <li>Follow the interactive prompts to assign a Container ID, Hostname, and Root Password.</li>
+        <li>Wait for the template to download and extract (approx. 15 seconds).</li>
+        <li>Start the container from the Proxmox UI or via `pct start &lt;vmid&gt;`.</li>
+      </ol>
 
-<section class="section section-light" id="desktop-iso">
-  <div class="container">
-    <div class="section-header">
-      <h2>Desktop ISO: HydrivaX GUI</h2>
-      <p><code>HydrivaX-v2.0-Desktop-amd64.iso</code> includes HydrivaX Desktop Core. Use <strong>Install HydrivaX OS v2.0 to Disk</strong> in the GRUB menu for a headless install, or use the try mode to explore the HydrivaX desktop.</p>
+      <h3>Expected Results</h3>
+      <p>You should have a running LXC container using minimal resources (~40MB RAM). You can now log in using the password you created and run <code>hx-status</code>.</p>
+
+      <h3>Troubleshooting</h3>
+      <p><strong>Container fails to start:</strong> Check if you have nesting enabled. The Autopilot script enables it by default, but if you modified it, go to Options -> Features -> Enable Nesting in Proxmox.<br>
+      <strong>No internet inside container:</strong> Ensure your Proxmox bridge (`vmbr0`) is configured correctly with DHCP or manually assign a static IP via the Proxmox Network tab for the container.</p>
     </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div>
-          <h3>Download and verify</h3>
-          <div class="code-block-group" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;">
-            <div class="code-block-label">Windows (PowerShell)</div>
-            <div class="code-block" style="margin:0;"><span class="prompt">PS&gt;</span> Get-FileHash HydrivaX-v2.0-Desktop-amd64.iso -Algorithm SHA256</div>
-            <div class="code-block-label">Linux / macOS</div>
-            <div class="code-block" style="margin:0;"><span class="prompt">$</span> sha256sum HydrivaX-v2.0-Desktop-amd64.iso</div>
+
+    <!-- VIRTUAL MACHINE TAB -->
+    <div id="vm" class="tab-content">
+      <h2>Deploying as a Virtual Machine</h2>
+      <p>Install HydrivaX Server ISO on VMware, VirtualBox, or KVM.</p>
+      
+      <h3>Requirements</h3>
+      <ul class="req-list">
+        <li>Hypervisor (VirtualBox, VMware ESXi/Workstation, KVM)</li>
+        <li>HydrivaX Server ISO</li>
+        <li>At least 1GB RAM and 8GB virtual disk</li>
+      </ul>
+
+      <h3>Step-by-Step Instructions</h3>
+      <ol class="req-list">
+        <li>Download the HydrivaX Server ISO from the <a href="download.html">downloads page</a>.</li>
+        <li>Create a new VM in your hypervisor. Choose "Linux 64-bit" or "Debian 12 64-bit" as the guest OS type.</li>
+        <li>Attach the downloaded ISO to the virtual CD/DVD drive.</li>
+        <li>Boot the VM. You will be greeted by the live environment.</li>
+        <li>Log in with user <code>root</code> (no password required in the live environment).</li>
+        <li>Run the installation command to write HydrivaX to disk:
+          <div class="code-block-wrapper">
+            <div class="code-block"><span class="prompt">root@hydrivax:~#</span> hx install</div>
+            <button class="copy-btn">Copy</button>
           </div>
-          <p>Expected SHA256: <code>1b8436ed3bffab6953442f347654157f40987a9039846cd41a6fe2bbca17095a</code></p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div>
-          <h3>Install from the GRUB menu (recommended)</h3>
-          <p>Select <strong>Install HydrivaX OS v2.0 to Disk</strong> at boot. This skips the desktop and runs the same text installer used on the Server ISO.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div>
-          <h3>Or boot to HydrivaX Desktop</h3>
-          <p>Choose <strong>Try HydrivaX OS v2.0 without installing - VGA Text</strong> to open the secondary desktop/rescue mode. A terminal installer opens automatically there too.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div>
-          <h3>Install from the desktop</h3>
-          <p>Use the automatic installer window, or click <strong>Install HydrivaX OS</strong> on the desktop/dock. It runs the same production installer:</p>
-          <div class="code-block"><span class="prompt">$</span> hx install</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div>
-          <h3>Explore the GUI</h3>
-          <p>The HydrivaX desktop includes a HydrivaX wallpaper, custom dock icons, HydrivaX apps, terminal fastfetch output, browser, settings, and file manager.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        </li>
+        <li>Follow the on-screen installer prompts.</li>
+        <li>Reboot and remove the ISO from the virtual drive.</li>
+      </ol>
 
-<section class="section" id="commands">
-  <div class="container">
-    <div class="section-header">
-      <h2>New v2.0 Commands</h2>
-      <p>These commands are available inside the ISO images.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3><code>hx-deploy install</code></h3>
-        <p>Branded entry point for installing HydrivaX OS permanently to a VM or physical disk.</p>
-      </div>
-      <div class="feature-card">
-        <h3><code>hx-install</code></h3>
-        <p>Native disk installer. Handles SATA/SCSI/VirtIO, NVMe, eMMC, universal GPT partitioning, ext4 formatting, rsync clone, UUID fstab, and BIOS/UEFI GRUB.</p>
-      </div>
-      <div class="feature-card">
-        <h3><code>hydrivax-install</code></h3>
-        <p>Compatibility alias for users who remember the older installer command.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <h3>Expected Results</h3>
+      <p>The VM will boot directly from the virtual hard drive into the HydrivaX OS prompt.</p>
 
-<section class="section section-light" id="lxc">
-  <div class="container">
-    <div class="section-header">
-      <h2>Proxmox LXC Template</h2>
-      <p>LXC remains a lightweight Proxmox container template. It is not for bare-metal disk installation and does not include the GUI installer workflow.</p>
+      <h3>Troubleshooting</h3>
+      <p><strong>Installer cannot find disk:</strong> Ensure your hypervisor is presenting the disk as SATA or VirtIO, not IDE or SCSI, as the minimal kernel strips some older legacy drivers.</p>
     </div>
-    <div class="steps" style="margin-top:1.5rem;">
-      <div class="steps-option-banner" style="background:rgba(1,218,254,0.08);border-left:4px solid #01DAFE;padding:1.25rem;border-radius:4px;margin-bottom:2rem;">
-        <h3 style="margin-top:0;color:#01DAFE;font-size:1.1rem;display:flex;align-items:center;gap:0.5rem;">🚀 Proxmox Autopilot Helper (Recommended)</h3>
-        <p style="margin:0 0 1rem;font-size:0.9rem;">To automatically download the template and configure a new LXC container with a single command, run this directly on your Proxmox VE host terminal:</p>
-        <div class="code-block" style="margin:0; font-size:0.85rem;"><span class="prompt">#</span> bash -c "$(curl -fsSL https://boubli.github.io/HydrivaX/install-lxc.sh)"</div>
-      </div>
 
-      <div style="font-weight:bold;margin-bottom:1rem;color:#01DAFE;font-size:1rem;">Or deploy manually:</div>
+    <!-- BARE METAL TAB -->
+    <div id="baremetal" class="tab-content">
+      <h2>Deploying on Bare Metal</h2>
+      <p>Install HydrivaX directly onto physical hardware like an Intel NUC, Mini PC, or standard server.</p>
+      
+      <h3>Requirements</h3>
+      <ul class="req-list">
+        <li>USB Flash Drive (at least 4GB)</li>
+        <li>BalenaEtcher or Rufus</li>
+        <li>Physical server/PC with UEFI boot support</li>
+      </ul>
 
-      <div class="step">
-        <div class="step-num">1</div>
-        <div>
-          <h3>Upload the template</h3>
-          <div class="code-block"><span class="prompt">$</span> scp HydrivaX-v2.5-LXC.tar.zst root@PROXMOX_IP:/var/lib/vz/template/cache/</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div>
-          <h3>Create a container</h3>
-          <p>Use the Proxmox UI to create a CT from the template. Then SSH in and use the CLI tools.</p>
-          <div class="code-block-group" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;">
-            <div class="code-block" style="margin:0;"><span class="prompt">$</span> hx-info</div>
-            <div class="code-block" style="margin:0;"><span class="prompt">$</span> hx-status</div>
-            <div class="code-block" style="margin:0;"><span class="prompt">$</span> hx-deploy list</div>
+      <h3>Step-by-Step Instructions</h3>
+      <ol class="req-list">
+        <li>Download the HydrivaX Server ISO.</li>
+        <li>Flash the ISO to your USB drive using BalenaEtcher or Rufus (choose DD mode if prompted).</li>
+        <li>Insert the USB drive into your physical machine and boot from it via the BIOS/UEFI boot menu.</li>
+        <li>Once the live system boots, connect an Ethernet cable.</li>
+        <li>Run the installer:
+          <div class="code-block-wrapper">
+            <div class="code-block"><span class="prompt">root@hydrivax:~#</span> hx install</div>
+            <button class="copy-btn">Copy</button>
           </div>
-        </div>
-      </div>
+        </li>
+        <li>Select your primary hard drive during the partition step.</li>
+        <li>Once complete, remove the USB drive and reboot.</li>
+      </ol>
+
+      <h3>Expected Results</h3>
+      <p>The physical machine will boot into HydrivaX. Network drivers for common Intel/Realtek NICs are included.</p>
+
+      <h3>Troubleshooting</h3>
+      <p><strong>No network connection:</strong> If your specific network card requires proprietary firmware not included in the stripped rootfs, you can deploy the firmware module via <code>hx-deploy linux-firmware-nonfree</code> while temporarily tethered via USB to your phone for internet.</p>
     </div>
-  </div>
-</section>
+
+    <!-- VPS TAB -->
+    <div id="vps" class="tab-content">
+      <h2>Deploying on a Cloud VPS</h2>
+      <p>Install HydrivaX on DigitalOcean, Hetzner, Linode, or AWS.</p>
+      
+      <h3>Requirements</h3>
+      <ul class="req-list">
+        <li>A VPS provider that supports custom ISO mounting or Rescue Mode.</li>
+      </ul>
+
+      <h3>Step-by-Step Instructions</h3>
+      <ol class="req-list">
+        <li>Upload the HydrivaX Server ISO to your cloud provider's custom image library.</li>
+        <li>Deploy a new instance using the custom ISO.</li>
+        <li>Open the web console provided by your cloud host.</li>
+        <li>Run the installation script:
+          <div class="code-block-wrapper">
+            <div class="code-block"><span class="prompt">root@hydrivax:~#</span> hx install</div>
+            <button class="copy-btn">Copy</button>
+          </div>
+        </li>
+        <li>Configure the network manually in the installer if DHCP is not provided by your VPS.</li>
+        <li>Detach the ISO and reboot the instance.</li>
+      </ol>
+
+      <h3>Expected Results</h3>
+      <p>Your VPS will be accessible via SSH (if you install the OpenSSH module or it was selected during setup).</p>
+
+      <h3>Troubleshooting</h3>
+      <p><strong>SSH connection refused:</strong> HydrivaX is headless and minimal. You must ensure you deploy the ssh server module: <code>hx-deploy openssh-server</code>.</p>
+    </div>
+
+  </main>
+</div>
 
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>Non-Commercial License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
     <ul class="footer-links">
-      <li><a href="install.html">Install</a></li>
-      <li><a href="modules.html">Modules</a></li>
-      <li><a href="specs.html">Specs</a></li>
-      <li><a href="download.html">Download</a></li>
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="security.html">Security</a></li>
     </ul>
   </div>
 </footer>
 
 <script src="js/copy.js"></script>
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
 </body>
 </html>

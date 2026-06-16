@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — HydrivaX OS</title>
+  <meta name="description" content="Frequently Asked Questions about HydrivaX OS.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .faq-item { margin-bottom: 2rem; border-bottom: 1px solid var(--border-glow); padding-bottom: 1.5rem; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-item h3 { color: var(--blue-accent); font-size: 1.3rem; margin-bottom: 0.75rem; }
+    .faq-item p { color: var(--text-muted); line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="HydrivaX home">
+      <img src="assets/images/navbar-logo.svg" alt="HydrivaX">
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html" class="active">Docs</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="download.html" class="nav-cta">Download</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" style="display: flex; gap: 2rem; margin-top: 2rem; padding-bottom: 4rem; flex-wrap: wrap;">
+  
+  <aside style="flex: 0 0 250px; border-right: 1px solid var(--border-glow); padding-right: 1.5rem;">
+    <h3 style="color: var(--cyan-bright); margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase;">Documentation</h3>
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+      <li><a href="quickstart.html" style="color: var(--text-muted); text-decoration: none;">Quick Start</a></li>
+      <li><a href="install.html" style="color: var(--text-muted); text-decoration: none;">Installation Guides</a></li>
+      <li><a href="commands.html" style="color: var(--text-muted); text-decoration: none;">CLI Commands</a></li>
+      <li><a href="modules.html" style="color: var(--text-muted); text-decoration: none;">Module Catalog</a></li>
+      <li><a href="architecture.html" style="color: var(--text-muted); text-decoration: none;">Architecture</a></li>
+      <li><a href="security.html" style="color: var(--text-muted); text-decoration: none;">Security</a></li>
+      <li><a href="faq.html" style="color: var(--cyan-bright); font-weight: 600;">FAQ</a></li>
+      <li><a href="compare.html" style="color: var(--text-muted); text-decoration: none;">Comparison</a></li>
+    </ul>
+  </aside>
+
+  <main style="flex: 1; min-width: 300px; max-width: 800px;">
+    <h1 style="margin-bottom: 0.5rem; font-size: 2.5rem;">Frequently Asked Questions</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Everything you need to know about HydrivaX.</p>
+
+    <div class="faq-item">
+      <h3>Why use HydrivaX?</h3>
+      <p>HydrivaX bridges the gap between full-fat operating systems like Debian/Ubuntu and highly minimal environments like Alpine. It provides a tiny footprint (~346MB disk, 40MB RAM) while retaining glibc compatibility, allowing you to run any standard Linux software. Its built-in module catalog means you never have to memorize complex installation scripts again.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How is it different from Debian?</h3>
+      <p>While HydrivaX is built on Debian's core packages, we remove thousands of non-essential files: kernel modules, man pages, locales, bootloaders, and firmware. We then layer our custom <code>hx-*</code> toolchain on top, transforming it from a general-purpose OS into a specialized, modular appliance for self-hosting.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How much RAM is required?</h3>
+      <p>HydrivaX idles at just ~40MB of RAM. A container provisioned with 256MB or 512MB of RAM is more than enough to run the base OS and several lightweight services. For heavier modules like Nextcloud or a large database, we recommend allocating 1GB to 2GB.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I run Docker?</h3>
+      <p><strong>Absolutely.</strong> Docker is a first-class citizen. Simply run <code>hx-deploy docker</code>. If you are running HydrivaX inside a Proxmox LXC container, be sure you have "Nesting" and "keyctl" enabled in your container's Features/Options tab so Docker can run properly.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I use it on Proxmox?</h3>
+      <p>Yes, Proxmox VE is our primary and most optimized platform. HydrivaX was built specifically to solve the headaches of LXC containers on Proxmox. You can deploy it instantly via our Autopilot script on the <a href="quickstart.html">Quick Start</a> page.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How are updates handled?</h3>
+      <p>Updates are dead simple. Just type <code>hx-update</code>. This will automatically update your module catalog, apply the latest security patches from Debian upstream, and clean up residual packages.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is it production ready?</h3>
+      <p>HydrivaX v2.0 is considered stable and production-ready for homelabbers, self-hosters, and SME deployments. Because it relies on the rock-solid foundation of Debian 12 and systemd, the underlying OS is extremely resilient. However, always ensure you have a backup strategy (e.g., using the <code>restic</code> module) before deploying critical data.</p>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Non-Commercial License · <a href="https://github.com/boubli/HydrivaX">GitHub</a> · by <a href="https://github.com/boubli">Youssef Boubli</a></p>
+    <ul class="footer-links">
+      <li><a href="quickstart.html">Quick Start</a></li>
+      <li><a href="install.html">Docs</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="security.html">Security</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="js/copy.js"></script>
+</body>
+</html>
